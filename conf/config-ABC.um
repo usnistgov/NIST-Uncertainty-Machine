@@ -1,4 +1,4 @@
-version=1.2
+version=1.3
 seed=5
 nbVar=3
 nbReal=1000000
@@ -6,6 +6,6 @@ variable0=a;7;32;0.5
 variable1=b;16;0.9;0.025
 variable2=c;13;1;0.3
 expression=a*b/c
-outputFile=./UserData/748cac4c5c909e18dd070f5691521dd54328253d43e4d273af22de0f03525116/results
+outputFile=./UserData/d8eeeb067b81a41478d32754a4ed82f49fcb5e6cc6abb21c09b7d7fcfa366ea9/results
 symmetrical=false
 correlation=false
