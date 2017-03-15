@@ -1,0 +1,14 @@
+version=1.2
+seed=5
+nbVar=6
+nbReal=1000000
+variable0=muC;7;4.63;0.0463
+variable1=rhoB;7;2217;0.5
+variable2=rhoM;7;1180;0.5
+variable3=rhoC;7;810;0.5
+variable4=tM;7;61;6.1
+variable5=tC;7;36.6;5.49
+expression=muC * ((rhoB-rhoM)/(rhoB-rhoC)) * (tM/tC)
+outputFile=./UserData/b9d2c8bcc69dc7b0182443122b6621ec77db0f9707aaa92d8c2ceb5c246a8cf4/results
+symmetrical=false
+correlation=false

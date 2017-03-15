@@ -1,0 +1,17 @@
+version=1.2
+seed=37
+nbVar=8
+nbReal=1000000
+variable0=S22.Mod;7;0.24776;0.00337
+variable1=S22.Arg;7;4.88683;0.01392
+variable2=S12.Mod;7;0.49935;0.00340
+variable3=S12.Arg;7;4.78595;0.00835
+variable4=S23.Mod;7;0.24971;0.00170
+variable5=S23.Arg;7;4.85989;0.00842
+variable6=S13.Mod;7;0.49952;0.00340
+variable7=S13.Arg;7;4.79054;0.00835
+expression=S22 = complex(modulus=S22.Mod, argument=S22.Arg);S12 = complex(modulus=S12.Mod, argument=S12.Arg);S23 = complex(modulus=S23.Mod, argument=S23.Arg);S13 = complex(modulus=S13.Mod, argument=S13.Arg);Gamma = S22 - S12*S23/S13;Re(Gamma);
+expression=S22 = complex(modulus=S22.Mod, argument=S22.Arg);S12 = complex(modulus=S12.Mod, argument=S12.Arg);S23 = complex(modulus=S23.Mod, argument=S23.Arg);S13 = complex(modulus=S13.Mod, argument=S13.Arg);Gamma = S22 - S12*S23/S13;Im(Gamma)
+outputFile=./UserData/6c29bf1b1d67cfcb98e202ecb4dfa0072a7a84837a47cabe790d829802461c77/results
+symmetrical=false
+correlation=false

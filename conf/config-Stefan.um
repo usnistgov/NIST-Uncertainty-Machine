@@ -1,0 +1,13 @@
+version=1.2
+seed=5
+nbVar=5
+nbReal=1000000
+variable0=h;7;6.62606957e-34;0.00000029e-34
+variable1=R;7;8.3144621;0.0000075
+variable2=Rinf;7;10973731.568539;0.000055
+variable3=e;7;5.4857990946e-4;0.0000000022e-4
+variable4=alpha;7;7.2973525698e-3;0.0000000024e-3
+expression=N = 32 * (pi^5) * h * (R^4) * (Rinf^4);D = 15 * (e^4) * ((1e-3)^4) * (299792458^6) * (alpha^8);N / D 
+outputFile=./UserData/11e00588102ed57023e7ce281b0ec559647b73c90ee640aadad062edae4a5f0b/results
+symmetrical=false
+correlation=false

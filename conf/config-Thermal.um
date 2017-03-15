@@ -1,0 +1,12 @@
+version=1.2
+seed=5
+nbVar=4
+nbReal=1000000
+variable0=L0;11;1.4999;0.0001;3
+variable1=T0;11;288.15;0.02;3
+variable2=L1;11;1.5021;0.0002;3
+variable3=T1;11;373.10;0.05;3
+expression=(L1-L0) / (L0*(T1-T0))
+outputFile=./UserData/7e21138716cb01ce858cefe427c345131e964e66c436951188420918e7450c90/results
+symmetrical=false
+correlation=false
