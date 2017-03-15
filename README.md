@@ -28,11 +28,11 @@ Run the following command in R to install the required R packages.
 install.packages(c('truncnorm','triangle','nleqslv','mvtnorm','numDeriv'), repos='http://cran.rstudio.com/')
 ```
 
-The web server must have writing access to the UserData folder.
+The web server must have writing access to the ```UserData``` folder.
 
 `Rscript` must be in the PATH or be specified on line 24 of `validation.php`and on line 7 of `rdtotxt.php`
 
-As in some case (when entering sample instead of specifying distributions) the POST data can be big, we recommend the following setting in `php.ini`
+In some case (especially when entering samples instead of specifying distributions) the POST data can be big, we recommend the following setting in `php.ini`
  `post_max_size = 16M`
 
- Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which will display more information relative to the computation.
+ Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
