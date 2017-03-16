@@ -1,7 +1,7 @@
 # NIST Uncertainty Machine
 ![NIST](https://nccoe.nist.gov/sites/all/themes/custom/nccoe2x/asset/img/NIST_logo.svg)
 
-The NIST Uncertainty Machine https://uncertainty.nist.gov is a Webbased
+The NIST Uncertainty Machine https://uncertainty.nist.gov is a Web-based
 application to evaluate the measurement uncertainty associated
 with an output quantity defined by a measurement model of the form
 y = f (x1 , ... , xn
@@ -9,7 +9,7 @@ y = f (x1 , ... , xn
 and the input quantities are modeled as random variables whose joint
 probability distribution also is specified fully.
 
-The NIST Uncertainty Machine evaluates measurement uncertainty by application of both the Gauss’s Formula and the Monte Carlo Method.
+The NIST Uncertainty Machine evaluates measurement uncertainty by application of both Gauss’s Formula and the Monte Carlo Method.
 
 
 ## Manual
