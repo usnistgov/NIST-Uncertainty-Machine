@@ -5,6 +5,7 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 		<title>NIST Uncertainty Machine</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="shortcut icon" href="Uncertainty2.ico">
 	</head>
 	<body>
 	<h3>NIST Uncertainty Machine</h3>
@@ -68,11 +69,20 @@
 		if($debug)
 			var_dump($_POST);
 
-		session_start();
 
 		$session = hash("sha256",session_id().date('h:i:s'));
 
-		$outputNb = $_POST["outputNb"];
+ 		$outputNb = 0;
+		foreach($_POST as $key => $value)
+		{
+		   if(preg_match('/^output.*/', $key))
+		   {
+		     $outputNb = $outputNb +1;   // You can access $value or create a new array based off these values
+		   }
+		}
+		if($debug)
+			var_dump($outputNb);
+
 
 		if($debug)
 			echo "{$session}<br />";
@@ -162,10 +172,10 @@
 			$inputs = intval($_POST["inputs"]);
 
 			$array = array(
-				"version=1.3\n",
-				"seed=".preg_replace('/\s+/', '',$_POST["seed"])."\n",
-				"nbVar={$inputs}\n",
-				"nbReal=".preg_replace('/\s+/', '',$_POST["nReal"])."\n",
+				"version=1.3\r\n",
+				"seed=".preg_replace('/\s+/', '',$_POST["seed"])."\r\n",
+				"nbVar={$inputs}\r\n",
+				"nbReal=".preg_replace('/\s+/', '',$_POST["nReal"])."\r\n",
 			);
 
 			for ($i = 0; $i < $inputs; $i++)
@@ -177,7 +187,7 @@
 					$paramK = preg_replace('/\s+/', '', $_POST["paramField{$i}-{$k}"]);
 					$temp="{$temp};{$paramK}";
 				}
-				$temp="{$temp}\n";
+				$temp="{$temp}\r\n";
 				if($debug)
 					echo "{$temp}<br />";
 				$array[]=$temp;
@@ -187,27 +197,27 @@
 			{
 				$outpuField = preg_replace('/[\r\n]+/', ';',$_POST["output{$i}"]);
 				$temp ="expression={$outpuField}";
-				$array[]="{$temp}\n";
+				$array[]="{$temp}\r\n";
 			}
 
 
-			$array[]= "outputFile={$UserData}/{$session}/results\n";
+			$array[]= "outputFile={$UserData}/{$session}/results\r\n";
 
 			if(isset($_POST['symmetrical']))
 			{
-				$array[]= "symmetrical=true\n";
+				$array[]= "symmetrical=true\r\n";
 			}
 			else
 			{
-				$array[]= "symmetrical=false\n";
+				$array[]= "symmetrical=false\r\n";
 			}
 
 			if(isset($_POST['correlation']))
 			{
-				$array[]= "correlation=true\n";
-				$array[]= "copula={$_POST['copulaChoice']}\n";
+				$array[]= "correlation=true\r\n";
+				$array[]= "copula={$_POST['copulaChoice']}\r\n";
 				if($_POST['copulaChoice']==1)
-					$array[]= "copulaValue=".preg_replace('/\s+/', '',$_POST['copulaField1'])."\n";
+					$array[]= "copulaValue=".preg_replace('/\s+/', '',$_POST['copulaField1'])."\r\n";
 				$temp = "correlationValue";
 				for ($i = 0; $i < $inputs; $i++)
 				{
@@ -217,12 +227,12 @@
 						$temp = "{$temp};{$correlValue}";
 					}
 				}
-				$temp = "{$temp}\n";
+				$temp = "{$temp}\r\n";
 				$array[]=$temp;
 			}
 			else
 			{
-				$array[]= "correlation=false\n";
+				$array[]= "correlation=false\r\n";
 			}
 
 

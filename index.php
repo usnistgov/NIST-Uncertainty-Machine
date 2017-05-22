@@ -59,7 +59,6 @@
 							<option value="14"> 14</option>
 							<option value="15"> 15</option>
 						</select>
-						<input type="hidden" name='outputNb' id='outputNb' value = "1"	>
 					</div>
 				<p id="nameHeader">Names of input quantities: </p>
 					<div id="nameList">
@@ -119,7 +118,7 @@
 	any other characteristic. We would appreciate acknowledgement if the
 	software is used.
 	<br/>
-	Version 1.3
+	Version 1.3.1
 	</p>
 	</footer>
 

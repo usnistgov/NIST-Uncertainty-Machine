@@ -7,6 +7,6 @@ variable1=R;7;137.786;0.013
 variable2=T235;7;704e6;1e6
 variable3=T238;7;4.4683e9;4.8e6
 expression=lambda235 = log(2)/T235;lambda238 = log(2)/T238;ageEquation = function (x, beta, lambdaU238, lambdaU235, RU238U235) {;	(exp(x*lambdaU235)-1)/(exp(x*lambdaU238)-1) - RU238U235*beta} ;lowerAge = 4e9 ;upperAge = 5e9 ;f = function(lambda238,lambda235,R,B){uniroot(ageEquation, lower=lowerAge, upper=upperAge, beta=B,lambdaU238=lambda238,lambdaU235=lambda235, RU238U235=R)$root};mapply(f,lambda238,lambda235,R,B)
-outputFile=./UserData/884c48c48f80cbc8a7a8c19cfc22587dbb0c5be34cc298322611380697d743ba/results
+outputFile=./UserData/6d0a45f60bff04f652695d4e88f23c241a1dcd7c0cd9417e6e110b9def1eb2b2/results
 symmetrical=true
 correlation=false

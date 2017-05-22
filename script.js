@@ -47,6 +47,7 @@ distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0];
 
 var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23]
 var nbDistrib = distribInfo[1].length;
+var outputNb = 1;
 
 
 $( "#inputs" ).change(changeNumberInput).change();
@@ -99,25 +100,25 @@ function changeNumberInput(){
 }
 
 function removeOutput(){
-	changeNumberOutput(parseInt($('#outputNb').val()) -1 );
+	changeNumberOutput(outputNb -1 );
 }
 
 function addOutput(){
-	changeNumberOutput(parseInt($('#outputNb').val()) +1 );
+	changeNumberOutput(outputNb +1 );
 }
 
 function changeNumberOutput(newOut){
-	var oldOut=parseInt($('#outputNb').val()) ;
+	var oldOut=outputNb ;
 
 	$('#dec').remove();
 	$('#inc').remove();
 
-	if(newOut > oldOut)
+	if(newOut > oldOut && newOut < 11)
 	{
-		while(newOut > oldOut && newOut < 11)
+		while(newOut > oldOut )
 		{
-			oldOut=parseInt($('#outputNb').val(),10) +1;
-			$('#outputNb').val(oldOut);
+			oldOut=outputNb +1;
+			outputNb = oldOut;
 			var toInsert="<textarea class='output' name='output"+(oldOut)+"' id='output"+(oldOut)+"' height=51px ></textarea>";
 			$('#container').append($(toInsert));
 		}
@@ -126,8 +127,8 @@ function changeNumberOutput(newOut){
 	{
 		while(newOut < oldOut)
 		{
-			oldOut=parseInt($('#outputNb').val(),10) -1;
-			$('#outputNb').val(oldOut);
+			oldOut=outputNb -1;
+			outputNb = oldOut;
 			($('#container textarea').last()).remove()
 		}
 	}
@@ -574,12 +575,19 @@ function readConfigFile(file) {
 
 
 function readSampleFile(file,dropId) {
+	var ext = (file.name).split('.').pop();
+	if(ext=="xls" | ext=="xlsx" | ext=="pdf")
+	{
+		alert("This feature only accepts text files, try exporting as a csv file.");
+	}
+	else {
+		var fr = new FileReader();
+		fr.onload = function(e) {
+			loadSample(e.target.result,dropId)
+		};
+		fr.readAsText(file);
+	}
 
-	var fr = new FileReader();
-	fr.onload = function(e) {
-		loadSample(e.target.result,dropId)
-	};
-	fr.readAsText(file);
 	return;
 }
 
@@ -675,7 +683,7 @@ function loadData(lines) {
 	while( lines[index].split("=")[0]=="expression")
 	{
 		addOutput()
-		var Out=parseInt($('#outputNb').val()) ;
+		var Out=outputNb ;
 		line = lines[index].split("expression=");
 		value = line[1].replace(/;/g,"\r\n");
 		$('#output'+(Out)).val(value);

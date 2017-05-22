@@ -302,11 +302,6 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 		errorStop("This application does not support a constant output quantity", errorFile)
 
 
-	#x11()
-	#plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
-	#		col="Blue", main="",
-	#		xlab="Output quantity (Y)", ylab="Probability Density")
-	#curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
 
 	if(outputFile!="no-output")
 	{
@@ -321,20 +316,24 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 		if(parallelL2)
 			mcparallel(
 				{
-						plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
-								col="Blue", main="",
-								xlab="Output quantity (Y)", ylab="Probability Density")
-						curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
-						dev.off()
+				  plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
+				       col="Blue", main="",
+				       xlab="", ylab="Probability Density")
+				  curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
+				  mtext("Output quantity (Y)          ", side=1, line=2,adj = 1)
+				  legend("bottomleft",inset =c(-0.17,- 0.20) , c("Monte Carlo sample drawn from distribution of output quantity","Gaussian distribution with same mean and standard deviation as Monte Carlo sample"), col = c("blue","red"), lty = c(1,3),cex = 0.55,xpd = TRUE)
+				  dev.off()
 
 				})
 		else
 		{
-			plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
-								col="Blue", main="",
-								xlab="Output quantity (Y)", ylab="Probability Density")
-			curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
-			dev.off()
+		  plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
+		       col="Blue", main="",
+		       xlab="", ylab="Probability Density")
+		  curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
+		  mtext("Output quantity (Y)          ", side=1, line=2,adj = 1)
+			legend("bottomleft",inset =c(-0.17,- 0.20) , c("Monte Carlo sample drawn from distribution of output quantity","Gaussian distribution with same mean and standard deviation as Monte Carlo sample"), col = c("blue","red"), lty = c(1,3),cex = 0.55,xpd = TRUE)
+		  dev.off()
 		}
 		cat("\nY values saved in file:  ",outputFile,"\n")
 		cat("Results saved in file:   ",outputFile2,"\n")

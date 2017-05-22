@@ -7,6 +7,6 @@ variable1=T0;11;288.15;0.02;3
 variable2=L1;11;1.5021;0.0002;3
 variable3=T1;11;373.10;0.05;3
 expression=(L1-L0) / (L0*(T1-T0))
-outputFile=./UserData/7e21138716cb01ce858cefe427c345131e964e66c436951188420918e7450c90/results
+outputFile=./UserData/ddf1ba5b1f73607442b89a8f38816365be7ca6c6e19cf71ebda87d128c6abc6c/results
 symmetrical=false
 correlation=false
