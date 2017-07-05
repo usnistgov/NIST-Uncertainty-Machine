@@ -30,7 +30,7 @@ drawDistrib = function(type,parameters,varNames,varEnv,errorFile,ii)
 	if(type[ii]==0)  ## Bernoulli (Prob. of success)
 	{
 		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=rbinom(nbReal, size=1, prob=parameters[[ii]][1])
+		varTemp=rbinom(nbReal, size=1, prob=parameters[[ii]][1])*1.0
 		meanX=parameters[[ii]][1];
 		sdX=sqrt(parameters[[ii]][1]*(1-parameters[[ii]][1]));
 	}
@@ -284,7 +284,7 @@ drawDistribCorel = function(type,parameters,varNames,z,varEnv,errorFile,ii)
 	if(type[ii]==0)  ## Bernoulli (Prob. of success)
 	{
 		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=qbinom(z[,ii], size=1, prob=parameters[[ii]][1])
+		varTemp=qbinom(z[,ii], size=1, prob=parameters[[ii]][1])*1.0
 		meanX=parameters[[ii]][1];
 		sdX=sqrt(parameters[[ii]][1]*(1-parameters[[ii]][1]));
 	}

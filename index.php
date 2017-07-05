@@ -118,7 +118,7 @@
 	any other characteristic. We would appreciate acknowledgement if the
 	software is used.
 	<br/>
-	Version 1.3.1
+	Version 1.3.3
 	</p>
 	</footer>
 
