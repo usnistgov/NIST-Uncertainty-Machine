@@ -36,3 +36,24 @@ In some case (especially when entering samples instead of specifying distributio
  `post_max_size = 16M`
 
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
+
+## Changelog
+### version 1.3.4 - 2017-09-27
+  - Add a complex step to the gradient computation in case the regular gradient fails
+  - A refactoring of the css code of the (dynamic, readability, etc,..)
+  - Removal of the update quantity name button, everything is now updating continuously as the user types the new names.
+  - In case of a gradient which is not computable for the gauss formula the app still displays the results and density function of the monte carlo simulation
+  - Add a reset button to reset the form
+  - Add a version number to the css and js files so that user browsers don’t use old cached version when there is an update
+  - Changing the number of inputs now doesn’t erase all the inputs quantity which were already entered
+  - Added a drop down menu in the information zone to quickly load examples
+  - Unified the end of lines of the R generated text files. (now it doesn’t matter if the R server is on linux or windows the generated text files use CRLF “\r\n” as their end of line delimiter.
+
+### version 1.3
+  - Descriptive legend added to the density plot
+  - Added the possibily to load samples values instead of specifying a distribution
+  - More function available in the output quantity calculation (matrix, solve, mapply, uniroot ...)
+  - Fixed a rarely occurring bug with the number of output by making this number a JavaScript variable instead of a hidden form field
+  - Added a warning when the user provide a sample file which is pdf xls or xlsx explaining that it requires a text file (advising csv)
+  - Added a minimum lifetime for the user data to remain on disk (to prevent data being deleted when under high usage)
+  - Creation of a different colored favicon icon for the input page and the result page of the app
