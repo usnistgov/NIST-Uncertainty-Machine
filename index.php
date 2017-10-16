@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 		<title>NIST Uncertainty Machine</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="style.css?v1.3.4">
 		<link rel="shortcut icon" href="Uncertainty.ico">
 	</head>
 	<body>
@@ -16,10 +16,24 @@
 					<br/>
 					User's manual available <a  href="./NISTUncertaintyMachine-UserManual.pdf"> here.</a>
 					<br/>
+					<div class="dropdown">
+					  <a href="#" class="dropbtn">Load examples</a>
+					  <div class="dropdown-content">
+					    <a href="./?example=Gauge">Gauge</a>
+							<a href="./?example=Resistance">Resistance</a>
+							<a href="./?example=Stefan">Stefan</a>
+							<a href="./?example=Thermal">Thermal</a>
+							<a href="./?example=Viscosity">Viscosity</a>
+							<a href="./?example=Voltage">Voltage</a>
+							<a href="./?example=Allende">Allende</a>
+
+					  </div>
+					</div>
+					<br/>
 					Instructions :
 					<ul>
 						<li>Select the number of input quantities.</li>
-						<li>Change the quantity names and update them if necessary.</li>
+						<li>Change the quantity names if necessary.</li>
 						<li>For each input quantity choose its distribution and its parameters.</li>
 						<li>Choose the number of realizations.</li>
 						<li>Write the definition of the output quantity in a valid R expression.</li>
@@ -31,8 +45,9 @@
 
 					<div id="drop_zone">Drop configuration file here or click to upload</div>
 					<input type='file' title="No file selected" id="files" onchange="pressed()"><label id="fileLabel"> </label>
-
-
+					<p>
+						<input id="reset" type="button" value="Reset" onClick="window.location.replace(location.pathname);">
+					</p>
 				</div>
 			</div>
 			<div id="form">
@@ -60,17 +75,19 @@
 							<option value="15"> 15</option>
 						</select>
 					</div>
-				<p id="nameHeader">Names of input quantities: </p>
+				<p id="nameHeader">Names of input quantities:
 					<div id="nameList">
 					</div>
-					<button type="button" id="validateNames">Update       quantity names</button>
+				</p>
 					<div >
 						<table id='distributions'>
 						</table>
 					</div>
-				<p>Number of realizations of the output quantity:  	</p>
-				<input name='nReal' id='nReal' type='text' value='1000000'  >
-
+					<br/>
+				<div>Number of realizations of the output quantity:
+					<input name='nReal' id='nReal' type='text' value='1000000'  >
+				</div>
+				<br/>
 				<div id="container">
 					Definition of output quantity (R expression):
 					<textarea class='output'  name='output1' id='output1' height=51px ></textarea>
@@ -107,7 +124,7 @@
 			</div>
 		</div>
 		<script src="library/jquery.js"></script>
-		<script src="script.js"></script>
+		<script src="script.js?v1.3.4"></script>
 
 
 	<footer id="footer">
@@ -118,7 +135,7 @@
 	any other characteristic. We would appreciate acknowledgement if the
 	software is used.
 	<br/>
-	Version 1.3.3
+	Version 1.3.4
 	</p>
 	</footer>
 

@@ -48,11 +48,11 @@ distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0];
 var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23]
 var nbDistrib = distribInfo[1].length;
 var outputNb = 1;
-
+var inputNb = 0;
+ $('#output1').val("x0");
 
 $( "#inputs" ).change(changeNumberInput).change();
 $('#correlation').change(correlationChange).change();;
-$('#validateNames').on('click',updateNames);
 
 $('#container').on( 'keyup', 'textarea', function (e){
     $(this).css('height', 'auto' );
@@ -85,18 +85,25 @@ if (exampleFile!=undefined)
 }
 
 
+
 function changeNumberInput(){
-	n=$('#inputs').val();
-	$('.nameField').remove();
-	for (var i=0;i<n;i++)
+	newInputNb=parseInt($('#inputs').val());
+	for (var i=inputNb;i<newInputNb;i++)
 	{
-		var toInsert="<input type='text'  class='nameField'  value=x"+(i)+" name='name"+(i)+"' > ";
+		var toInsert="<input type='text' oninput='updateNames()' maxlength='20' class='nameField'  value=x"+(i)+" id='name"+(i)+"' name='name"+(i)+"' > ";
 		$('#nameList').append($(toInsert));
 	}
+
+	for (var i=inputNb;i>=newInputNb;i--)
+	{
+			$("#name"+(i)).remove();
+	}
+	updateNames();
+
 	plotDistribLine();
 	if($('#correlation').prop('checked')==true)
 		plotCorrelationTable();
-	 $('#output1').val("x0");
+	 inputNb = newInputNb;
 }
 
 function removeOutput(){
@@ -142,15 +149,13 @@ function changeNumberOutput(newOut){
 
 
 function updateNames(){
-	n=$('#inputs').val();
+	n=parseInt($('#inputs').val());
 	for (var i=0;i<n;i++)
 	{
 		$( '#label'+(i)).text($("input[name=name"+i+"]").val());
 	}
 	if($('#correlation').prop('checked')==true)
 		plotCorrelationTable();
-	 $('#output1').val($("input[name=name"+0+"]").val());
-	 $('#output1').autoResize();
 }
 
 function sortSelect(i) {
@@ -215,16 +220,22 @@ function sortSelectAdvance(i) {
 
 
 function plotDistribLine(){
-	n=$('#inputs').val();
-	$('.distrib').remove();
-	for (var i=0;i<n;i++)
+	newInputNb=parseInt($('#inputs').val());
+
+	for (var i=inputNb;i<newInputNb;i++)
 	{
-		var toInsert="<tr class='distrib'><th id='label"+(i)+"'>"+$("input[name=name"+i+"]").val()+"</th><td><select id='distChoice"+(i)+"' name='distChoice"+(i)+"' onchange='plotParamLine("+(i)+")' ></select></td><td><div class='paramLine' id='param"+(i)+"' ></div></td> </tr>";
+		var toInsert="<tr class='distrib' id='distrib"+(i)+"' ><th id='label"+(i)+"'>"+$("input[name=name"+i+"]").val()+"</th><td><select id='distChoice"+(i)+"' name='distChoice"+(i)+"' onchange='plotParamLine("+(i)+")' ></select></td><td><div class='paramLine' id='param"+(i)+"' ></div></td> </tr>";
 		$('#distributions').append($(toInsert));
 		sortSelect(i);
 		$( '#distChoice'+(i) ).val(7);
 		plotParamLine(i);
 	}
+
+	for (var i=inputNb;i>=newInputNb;i--)
+	{
+			$("#distrib"+(i)).remove();
+	}
+
 
 
 }
@@ -423,7 +434,7 @@ function plotCorrelationTable(){
 	$('#correlationTable').empty();
 	$('#copula').empty();
 	$('#copulaParam').empty();
-	n=$('#inputs').val();
+	n=parseInt($('#inputs').val());
 	var toInsert="<tr id='headerCorrel'><th></th> </tr>";
 	$('#correlationTable').append($(toInsert));
 	for (var i=0;i<n;i++)

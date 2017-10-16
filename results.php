@@ -5,7 +5,7 @@
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 		<title>NIST Uncertainty Machine</title>
 		<link rel="stylesheet" type="text/css" href="./library/jquery-ui.min.css">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="style.css?v1.3.4">
 		<link rel="shortcut icon" href="Uncertainty2.ico">
 	</head>
 	<body>
@@ -25,6 +25,6 @@
 		</div>
 		<script src="library/jquery.js"></script>
 		<script src="library/jquery-ui.min.js"></script>
-		<script src="results.js"></script>
+		<script src="results.js?v1.3.4"></script>
 	</body>
 </html>

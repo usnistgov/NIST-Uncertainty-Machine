@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
 		<title>NIST Uncertainty Machine</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="style.css?v1.3.4">
 		<link rel="shortcut icon" href="Uncertainty2.ico">
 	</head>
 	<body>

@@ -85,7 +85,13 @@ errorStop = function (errorString = "Error", errorFile = NULL)
 
 gummer = function (f, x, u, r=diag(length(u)), ...)
 {
-	g = grad(f, x, ...)
+	g=NA
+	try(g <- grad(f, x, ...))
+	if(any(is.na(g)))
+	{
+		cat(paste("Complex gradient in use\n"))
+		try(g <- grad(f, x,,method = "complex" ,...))
+	}
 	y = f(x, ...)
 	uy = sqrt(matrix(g, nrow=1) %*% (outer(u,u,"*")*r) %*% matrix(g, ncol=1))
 	return(c(y, uy))
@@ -455,31 +461,37 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 
 	if(exists("yfunction"))
 	{
+		sdGauss=NA
 		if(is.logical(correlation))
 			try(sdGauss <- gummer(f=yfunction, x=meanX, u=sdX))
 		else
 			try(sdGauss <- gummer(f=yfunction, x=meanX, u=sdX, r=correlation))
-		if(!exists("sdGauss"))
-			errorStop(paste("Impossible to evaluate output expression"), outputFile2)
+
 	}
 
 	## Sensitivity Coefficients and Uncertainty Budget
-	ygrad = grad(f=yfunction, x=meanX)
-	sensitivity = ygrad
-	if(is.na(sdGauss[2]) || (sdGauss[2]==Inf || sdGauss[2]==0 ))
+	ygrad=NA
+	try(ygrad <- grad(f=yfunction, x=meanX))
+	if(any(is.na(ygrad)))
+		try(ygrad <- grad(f=yfunction, x=meanX,method = "complex"))
+	if(!any(is.na(ygrad)))
 	{
-		proportions = rep(NA,length(sdX)+1)
-	} else
-	{
-		residual = 1-sum(((ygrad*sdX)^2)/sdGauss[2]^2)
-		if (abs(residual) < sqrt(.Machine$double.eps)) {residual = 0}
-		proportions = c(((ygrad*sdX)^2)/(sdGauss[2]^2), residual)
-	}
+		sensitivity = ygrad
+		if(is.na(sdGauss[2]) || (sdGauss[2]==Inf || sdGauss[2]==0 ))
+		{
+			proportions = rep(NA,length(sdX)+1)
+		} else
+		{
+			residual = 1-sum(((ygrad*sdX)^2)/sdGauss[2]^2)
+			if (abs(residual) < sqrt(.Machine$double.eps)) {residual = 0}
+			proportions = c(((ygrad*sdX)^2)/(sdGauss[2]^2), residual)
+		}
 
-	budget = data.frame(
-			"SensitivityCoeffs"=signif(c(sensitivity, NA), 2),
-			"Percent.u2"=signif(100*proportions, 2))
-	rownames(budget) = c(varNames, "Correlations")
+		budget = data.frame(
+				"SensitivityCoeffs"=signif(c(sensitivity, NA), 2),
+				"Percent.u2"=signif(100*proportions, 2))
+		rownames(budget) = c(varNames, "Correlations")
+	}
 	## Computation of coverage intervals
 	CI = matrix(rep(NA,16),ncol=4)
 	if(symmetrical == TRUE)
@@ -545,37 +557,44 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	dimnames(anova) = list(c(rowNames, "Residual"),
 												 c("w/out Residual", "w/ Residual"))
 
-	outString = "===== RESULTS ==============================\n"
-	outString = c(outString,     "Monte Carlo Method\n")
-	outString = c(outString, paste("Summary statistics for sample of size", nbReal, "\n"))
+	outString = "===== RESULTS ==============================\r\n"
+	outString = c(outString,     "Monte Carlo Method\r\n")
+	outString = c(outString, paste("Summary statistics for sample of size", nbReal, "\r\n"))
 	outString = c(outString, paste("ave     =", yAve$value))
 	outString = c(outString, paste("sd      =", ySd$value) )
 
 	outString = c(outString, paste("median  =",	yMedian))
-	outString = c(outString, paste("mad     =", yMad, "\n"))
+	outString = c(outString, paste("mad     =", yMad, "\r\n"))
 	if(symmetrical == TRUE)
-		outString = c(outString, paste("Symmetrical coverage intervals\n"))
+		outString = c(outString, paste("Symmetrical coverage intervals\r\n"))
 	else
-		outString = c(outString, paste("Coverage intervals\n"))
+		outString = c(outString, paste("Coverage intervals\r\n"))
 
 	outString = c(outString, paste(sprintf("99%% (%8g, %8g)\tk = %8g ",CI[1,1],CI[2,1],CI[3,1])))
 	outString = c(outString, paste(sprintf("95%% (%8g, %8g)\tk = %8g ",CI[1,2],CI[2,2],CI[3,2])))
 	outString = c(outString, paste(sprintf("90%% (%8g, %8g)\tk = %8g ",CI[1,3],CI[2,3],CI[3,3])))
 	outString = c(outString, paste(sprintf("68%% (%8g, %8g)\tk = %8g ",CI[1,4],CI[2,4],CI[3,4])))
 
-	outString = c(outString, paste("\nANOVA (% Contributions)\n"))
+	outString = c(outString, paste("\r\nANOVA (% Contributions)\r\n"))
 	outString = c(outString,capture.output(anova))
-	outString = c(outString, paste("\n--------------------------------------------\n"))
-	outString = c(outString, paste("Gauss's Formula (GUM's Linear Approximation)", "\n"))
+	outString = c(outString, paste("\r\n--------------------------------------------\r\n"))
+	outString = c(outString, paste("Gauss's Formula (GUM's Linear Approximation)", "\r\n"))
+	if(any(is.na(sdGauss)))
+		outString = c(outString, paste("Impossible to compute gradient", "\r\n"))
 	outString = c(outString, paste("        y  =", signif( sdGauss[1], yAve$digits)))
-	outString = c(outString, paste("      u(y) =", signif( sdGauss[2], ySd$digits), "\n"))
-	outString = c(outString,capture.output(budget))
-	outString = c(outString, paste("============================================"))
+	outString = c(outString, paste("      u(y) =", signif( sdGauss[2], ySd$digits), "\r\n"))
+	if(exists("budget"))
+		outString = c(outString,capture.output(budget))
+	outString = c(outString, paste("============================================\r\n"))
 
-	cat(outString , sep = "\n", fill = FALSE, labels = NULL)
+	cat(outString , sep = "\r\n", fill = FALSE, labels = NULL)
 	if(outputFile!="no-output")
 	{
 		write(outString, file = outputFile2, append = FALSE)
+		output.file <- file(outputFile2, "wb")
+		#write(outString, file = outputFile2, append = FALSE)
+		write.table(outString, col.names=FALSE, row.names=FALSE, quote=FALSE, file = output.file, append=FALSE, eol="\r\n")
+		close(output.file)
 	}
 
 	if(parallelL2)

@@ -23,17 +23,19 @@ mergeOutput = function (outputFile,nbOut)
 
 	outputList = paste(outputFile,"All-results.txt",sep="")
 
-	file.create(outputList)
+  output.file <- file(outputList, "wb")
 
 	for( ii in 1:nbOut)
 	{
-		write(paste("=====RESULTS OUTPUT",ii,"======================\n"), file = outputList, append = TRUE)
+		write.table(paste("=====RESULTS OUTPUT",ii,"======================\r\n"), col.names=FALSE, row.names=FALSE, quote=FALSE, file = output.file, append=TRUE, eol="\r\n")
 		fh = file( fileList[ii], open='rt' )
 		lines = readLines(fh)
 		lines = lines [-1:-2]
-		write(lines, file = outputList, append = TRUE)
+		write.table(lines, col.names=FALSE, row.names=FALSE, quote=FALSE, file = output.file, append=TRUE, eol="\r\n")
 		close(fh)
 	}
+	close(output.file)
+
 
 	fileList = {};
 
