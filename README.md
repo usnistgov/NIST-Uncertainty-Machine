@@ -40,10 +40,9 @@ In some case (especially when entering samples instead of specifying distributio
 ## Changelog
 ### version 1.3.4 - 2017-09-27
   - Add a complex step to the gradient computation in case the regular gradient fails
-  - A refactoring of the css code of the (dynamic, readability, etc,..)
   - Removal of the update quantity name button, everything is now updating continuously as the user types the new names.
-  - In case of a gradient which is not computable for the gauss formula the app still displays the results and density function of the monte carlo simulation
-  - Add a reset button to reset the form
+  - In case of a not computable gradient for the gauss formula the app still displays the results and density function of the monte carlo simulation
+  - Add a reset button
   - Add a version number to the css and js files so that user browsers don’t use old cached version when there is an update
   - Changing the number of inputs now doesn’t erase all the inputs quantity which were already entered
   - Added a drop down menu in the information zone to quickly load examples
@@ -51,7 +50,7 @@ In some case (especially when entering samples instead of specifying distributio
 
 ### version 1.3
   - Descriptive legend added to the density plot
-  - Added the possibily to load samples values instead of specifying a distribution
+  - Added the possibility to load samples values instead of specifying a distribution
   - More function available in the output quantity calculation (matrix, solve, mapply, uniroot ...)
   - Fixed a rarely occurring bug with the number of output by making this number a JavaScript variable instead of a hidden form field
   - Added a warning when the user provide a sample file which is pdf xls or xlsx explaining that it requires a text file (advising csv)
