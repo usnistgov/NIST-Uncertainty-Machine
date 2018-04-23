@@ -38,6 +38,13 @@ In some case (especially when entering samples instead of specifying distributio
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
 
 ## Changelog
+### version 1.3.5 - 2018-04-23
+  - New interface with NIST header and footer
+  - Added verification script [available here](https://uncertainty.nist.gov/verification.php)
+  - Improved reproducibility of the results
+  - Updated Manual
+
+
 ### version 1.3.4 - 2017-09-27
   - Add a complex step to the gradient computation in case the regular gradient fails
   - Removal of the update quantity name button, everything is now updating continuously as the user types the new names.
@@ -46,7 +53,7 @@ In some case (especially when entering samples instead of specifying distributio
   - Add a version number to the css and js files so that user browsers don’t use old cached version when there is an update
   - Changing the number of inputs now doesn’t erase all the inputs quantity which were already entered
   - Added a drop down menu in the information zone to quickly load examples
-  - Unified the end of lines of the R generated text files. (now it doesn’t matter if the R server is on linux or windows the generated text files use CRLF “\r\n” as their end of line delimiter.
+  - Unified the end of lines of the R generated text files. (now it doesn’t matter if the R server is on linux or windows the generated text files use CRLF “\r\n” as their end of line delimiter.    
 
 ### version 1.3
   - Descriptive legend added to the density plot

@@ -1,14 +1,13 @@
 //######################################################################
 //## SECTION (SPECIFICATION) ===========================================
 //######################################################################
-//## Javascript code to load and display the results 
+//## Javascript code to load and display the results
 //##
 //## ===================================================================
 
 var UserData = "./UserData";
 resultsDisplay();
 $( "#tabs" ).tabs();
-var multiOut=true;
 
 function getUrlVars()
 {
@@ -49,7 +48,7 @@ function resultsDisplay() {
 		$('#results').append($(toInsert));
 		for(var i = 1; i <= outputNb; i++)
 		{
-			var toInsert="<div id='tabs-"+ i +"'><div class='results'><pre class='resultsText' id='resultsText" + i +"'>"+i+"</pre><div class='columnRight' id='columnRight"+i+"'><div id='density"+i+"'></div><div id='download"+i+"'></div></div><br style='clear:both;'/></div></div>"
+			var toInsert="<div id='tabs-"+ i +"'><div class='results'><pre class='resultsText' id='resultsText" + i +"'>"+i+"</pre><div class='columnRight' id='columnRight"+i+"'><div id='density"+i+"'></div><div id='download"+i+"'></div><fieldset id='sharedOuputs'><legend>Shared Ouputs</legend><div id='downloadAll"+i+"'></div></fieldset></div><br style='clear:both;'/></div></div>"
 			$('#tabs').append($(toInsert));
 		}
 		var toInsert="</div></div>";
@@ -108,29 +107,24 @@ function linksTabDisplay(i){
 	var d = new Date();
 	var density = UserData+"/"+ID+"/results"+i+"-density.jpg?"+d.getTime();
 
-	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\"> Download JPEG file with plot shown on this page </a> <br/>    ";
+	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\" style='margin-left: 19px;'> Download JPEG file with plot shown on this page </a> <br/>    ";
 	$('#download'+(i)).append($(toInsert));
 
-	if( multiOut==true )
-	{
-		multiOut = false;
-		var d = new Date();
-		var values = UserData+"/"+ID+"/resultsAll-values.Rd";
-		var config = UserData+"/"+ID+"/config.um?"+d.getTime();
-		var text = UserData+"/"+ID+"/resultsAll-results.txt?"+d.getTime();
+  var values = UserData+"/"+ID+"/resultsAll-values.Rd";
+  var config = UserData+"/"+ID+"/config.um?"+d.getTime();
+  var text = UserData+"/"+ID+"/resultsAll-results.txt?"+d.getTime();
 
-		var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\"> Download binary R data file with Monte Carlo values of output quantity </a> <br/>     ";
-		$('#downloadAll').append($(toInsert));
+	var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\"> Download binary R data file with Monte Carlo values all output quantities </a> <br/>     ";
+	$('#downloadAll'+(i)).append($(toInsert));
 
-		var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> Download a text file with Monte Carlo values of output quantity </a> <br/>     ";
-		$('#downloadAll').append($(toInsert));
+	var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> Download a text file with Monte Carlo values of all output quantities </a> <br/>     ";
+	$('#downloadAll'+(i)).append($(toInsert));
 
-		var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> Download text file with numerical results shown on this page </a>  <br/>  ";
-		$('#downloadAll').append($(toInsert));
+	var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> Download text file with numerical results </a>  <br/>  ";
+	$('#downloadAll'+(i)).append($(toInsert));
 
+  var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> Download configuration file </a>   ";
+	$('#downloadAll'+(i)).append($(toInsert));
 
-		var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> Download configuration file </a>   ";
-		$('#downloadAll').append($(toInsert));
-	}
 
 }
