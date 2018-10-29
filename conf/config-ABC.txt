@@ -1,0 +1,11 @@
+version=1.4
+seed=5
+nbVar=3
+nbReal=1000000
+variable0=a;7;32;0.5
+variable1=b;16;0.9;0.025
+variable2=c;13;1;0.3
+expression=a*b/c
+outputFile=./UserData/4bbbd2692f7defde6da18c9ae4b1a85724ebc80cd2745a40036e734313da30b3/results
+symmetrical=false
+correlation=false

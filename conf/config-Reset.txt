@@ -1,0 +1,9 @@
+version=1.4
+seed=5
+nbVar=1
+nbReal=1000000
+variable0=x0;7;0;1
+expression=x0
+outputFile=./UserData/56807513/results
+symmetrical=false
+correlation=false

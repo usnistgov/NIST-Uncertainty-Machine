@@ -7,7 +7,7 @@
 	$Rscript = "Rscript";
 
 	if(!file_exists($valuestxt))
-		exec($Rscript." --verbose rdtotxt.R ".$values ,$Routput2);
+		exec($Rscript." --verbose R/rdtotxt.R ".$values ,$Routput2);
 
 	if(file_exists($valuestxt))
 	{

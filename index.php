@@ -1,145 +1,179 @@
 <!DOCTYPE html>
 
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
-		<title>NIST Uncertainty Machine</title>
-		<link rel="stylesheet" type="text/css" href="style.css?v1.3.5">
-		<link rel="shortcut icon" href="Uncertainty.ico">
-	</head>
-	<body>
-		<div class="nist-header">
-			<div class="nist-header__logo">
-						<a href="https://www.nist.gov/" title="National Institute of Standards and Technology" class="nist-header__logo-link" rel="home">
-						  <img src="https://pages.nist.gov/nist-header-footer/images/svg/nist_logo_reverse.svg" onerror="this.src='https://pages.nist.gov/nist-header-footer/images/nist_logo_reverse.png'" alt="">
-						</a>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+	<title>NIST Uncertainty Machine</title>
+	<link rel="stylesheet" type="text/css" href="./library/jquery-ui.min.css">
+	<link rel="stylesheet" type="text/css" href="./library/codemirror.css">
+	<link rel="stylesheet" type="text/css" href="./style.css?v1.4">
+
+	<script src="./library/codemirror.js"></script>
+	<script src="./library/matchbrackets.js"></script>
+	<script src="./library/r.js"></script>
+
+	<link rel="shortcut icon" href="Uncertainty.ico">
+	<style id="antiClickjack">body{display:none !important;}</style>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114254568-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-114254568-1');
+	</script>
+	
+</head>
+<body>
+	<div class="nist-header">
+		<div class="nist-header__logo">
+			<a href="https://www.nist.gov/" title="National Institute of Standards and Technology" class="nist-header__logo-link" rel="home">
+				<img src="./nist_logo_reverse.svg"  alt="">
+			</a>
+		</div>
+		<div class="nist-header__title">
+			<h4 class="title" >Uncertainty Machine</h4>
+			<h5 class="title" >Version 1.4</h5>
+		</div>
+	</div>
+	<div class="content">
+
+		<div id="tabs">
+			<ul id="tabsul">
+				<li><a href="#tabs-1">About</a></li>
+				<li><a href="#tabs-2">App</a></li>
+			</ul>
+			<div id="tabs-1">
+
 			</div>
-			<div class="nist-header__title">
-				<h4 class="title" onClick="window.location.replace('./index.php');">Uncertainty Machine</h4>
-				<h5 class="title" onClick="window.location.replace('./verification.php');">Version 1.3.5</h3>
+			<div id="tabs-2">
+				<div id="form">
+					<form name="input" id="input"   action="validation.php"   >
+
+						<fieldset  class="mainFieldset" >
+							<legend class="mainLegend">Introduction</legend>
+							<div class="columnContainer">
+								<div class="columnLeft">
+
+									<p>
+										The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an
+										output quantity defined by a measurement model of the form <code>y = f(x<sub>0</sub>,...,x<sub>n</sub>)</code>.
+									</p>
+									<p>
+										User's manual available <a href="./NISTUncertaintyMachine-UserManual.pdf"> here.</a>
+									</p>
+									<div class="dropdown">
+										<a href="#" class="dropbtn">Load examples</a>
+										<div class="dropdown-content">
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Gauge.txt')">Gauge</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Resistance.txt')">Resistance</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Stefan.txt')">Stefan</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Thermal.txt')">Thermal</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Viscosity.txt')">Viscosity</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Voltage.txt')">Voltage</a>
+											<a href="#" onClick="loadServerConfigFile('./conf/config-Allende.txt')">Allende</a>
+
+										</div>
+									</div>
+								</div>
+								<div class = "columnRight" id="load">
+
+									<div id="drop_zone">Drop configuration file here or click to upload</div>
+									<input type='file' title="No file selected" id="files" onchange="pressed()"><label id="fileLabel"> </label>
+									<p>
+										<input id="reset" type="button" value="Reset" onClick="loadServerConfigFile('./conf/config-Reset.txt')">
+									</p>
+								</div>
+							</div>
+
+						</fieldset>
+						<fieldset  class="mainFieldset" id="mainDistrib">
+							<legend class="mainLegend">1. Select Inputs & Choose Distributions</legend>
+							<div>Number of input quantities:
+								<select id="inputs" name="inputs">
+									<option value="1" selected> 1</option>
+									<option value="2"> 2</option>
+									<option value="3"> 3</option>
+									<option value="4"> 4</option>
+									<option value="5"> 5</option>
+									<option value="6"> 6</option>
+									<option value="7"> 7</option>
+									<option value="8"> 8</option>
+									<option value="9"> 9</option>
+									<option value="10"> 10</option>
+									<option value="11"> 11</option>
+									<option value="12"> 12</option>
+									<option value="13"> 13</option>
+									<option value="14"> 14</option>
+									<option value="15"> 15</option>
+								</select>
+							</div>
+							<p id="nameHeader">Names of input quantities:
+								<div id="nameList">
+								</div>
+							</p>
+							<div >
+								<table id='distributions'>
+								</table>
+							</div>
+
+							Correlations
+							<label class="switch">
+										<input type="checkbox"  name="correlation" id="correlation" value="bar" />
+										<span class="slider round" id="correlation"></span>
+
+							</label>
+
+							<div id='correlationClass'>
+								<table id='correlationTable'>
+								</table>
+								<table >
+									<tr>
+										<td>
+											<div id="copula">
+											</div>
+										</td>
+										<td>
+											<div id="copulaParam">
+											</div>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</fieldset>
+						<fieldset  class="mainFieldset" >
+							<legend class="mainLegend">2. Choose Options</legend>
+							<div>Number of realizations of the output quantity:
+								<input name='nReal' id='nReal' type='text' value='1000000'  >
+							</div>
+							<div>Random number generator seed:
+								<input name='seed' id='seed' type='text' value='' size="4" >
+							</div>
+							Symmetrical coverage intervals
+							<label class="switch">
+										<input type="checkbox"  name="symmetrical" id="symmetrical" value="bar" />
+										<span class="slider round" id="symmetrical"></span>
+
+							</label>
+							<br/>
+						</fieldset>
+						<fieldset  class="mainFieldset" >
+							<legend class="mainLegend">3. Write the Definition of Output Quantity</legend>
+							<div id="container">
+								Definition of output quantity (R expression):
+								<textarea class='output'  name='output1' id='output1' height=51px ></textarea>
+								<button class='buttonOut' id='dec' type="button" onclick=removeOutput()>-</button>
+								<button class='buttonOut' id='inc' type="button" onclick=addOutput()>+</button>
+							</div>
+						</fieldset>
+						<input type="submit" value="Run the computation"/>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="content">
-
-
-			<div id="help">
-				<div id="instruction">
-					<br/>
-					User's manual available <a  href="./NISTUncertaintyMachine-UserManual.pdf"> here.</a>
-					<br/>
-					<div class="dropdown">
-					  <a href="#" class="dropbtn">Load examples</a>
-					  <div class="dropdown-content">
-					    <a href="./?example=Gauge">Gauge</a>
-							<a href="./?example=Resistance">Resistance</a>
-							<a href="./?example=Stefan">Stefan</a>
-							<a href="./?example=Thermal">Thermal</a>
-							<a href="./?example=Viscosity">Viscosity</a>
-							<a href="./?example=Voltage">Voltage</a>
-							<a href="./?example=Allende">Allende</a>
-
-					  </div>
-					</div>
-					<br/>
-					Instructions :
-					<ul>
-						<li>Select the number of input quantities.</li>
-						<li>Change the quantity names if necessary.</li>
-						<li>For each input quantity choose its distribution and its parameters.</li>
-						<li>Choose the number of realizations.</li>
-						<li>Write the definition of the output quantity in a valid R expression.</li>
-						<li>Choose and set the correlations if necessary.</li>
-						<li>Run the computation.</li>
-					</ul>
-				</div>
-				<div id="load">
-
-					<div id="drop_zone">Drop configuration file here or click to upload</div>
-					<input type='file' title="No file selected" id="files" onchange="pressed()"><label id="fileLabel"> </label>
-					<p>
-						<input id="reset" type="button" value="Reset" onClick="window.location.replace(location.pathname);">
-					</p>
-				</div>
-			</div>
-			<div id="form">
-			<form name="input" id="input"  method="POST" action="validation.php" target="_blank"  >
-					<div>Random number generator seed:
-						<input name='seed' id='seed' type='text' value='' size="4" >
-					</div>
-					<br/>
-					<div>Number of input quantities:
-						<select id="inputs" name="inputs">
-							<option value="1" selected> 1</option>
-							<option value="2"> 2</option>
-							<option value="3"> 3</option>
-							<option value="4"> 4</option>
-							<option value="5"> 5</option>
-							<option value="6"> 6</option>
-							<option value="7"> 7</option>
-							<option value="8"> 8</option>
-							<option value="9"> 9</option>
-							<option value="10"> 10</option>
-							<option value="11"> 11</option>
-							<option value="12"> 12</option>
-							<option value="13"> 13</option>
-							<option value="14"> 14</option>
-							<option value="15"> 15</option>
-						</select>
-					</div>
-				<p id="nameHeader">Names of input quantities:
-					<div id="nameList">
-					</div>
-				</p>
-					<div >
-						<table id='distributions'>
-						</table>
-					</div>
-					<br/>
-				<div>Number of realizations of the output quantity:
-					<input name='nReal' id='nReal' type='text' value='1000000'  >
-				</div>
-				<br/>
-				<div id="container">
-					Definition of output quantity (R expression):
-					<textarea class='output'  name='output1' id='output1' height=51px ></textarea>
-					<button id='dec' type="button" onclick=removeOutput()>-</button>
-					<button id='inc' type="button" onclick=addOutput()>+</button>
-
-				</div>
-				<label><input type="checkbox"  name="symmetrical" id="symmetrical" value="bar" /> Symmetrical coverage intervals</label>
-				<br/>
-				<label><input type="checkbox"  name="correlation" id="correlation" value="bar" /> Correlations</label>
-				<div id='correlationClass'>
-					<table id='correlationTable'>
-					</table>
-					<table >
-						<tr>
-							<td>
-								<div id="copula">
-								</div>
-							</td>
-							<td>
-								<div id="copulaParam">
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-
-
-				<input type="submit" value="Run the computation"/>
-				<div id="state"></div>
-				<span id='error'></span>
-				<span id='percent'></span><br/>
-			</form>
-			</div>
-		</div>
-		<script src="library/jquery.js"></script>
-		<script src="script.js?v1.3.5"></script>
-
-
-
+	</div>
 
 	<footer id="footer" class="nist-footer">
 		<div class="nist-footer__inner">
@@ -200,6 +234,14 @@
 			</div>
 		</div>
 	</footer>
-</body>
 
+	<script src="library/jquery.js"></script>
+	<script src="library/jquery-ui.min.js"></script>
+	<script src="results.js?v1.4"></script>
+	<script src="script.js?v1.4"></script>
+
+
+
+
+</body>
 </html>

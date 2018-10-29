@@ -1,0 +1,13 @@
+version=1.4
+seed=5
+nbVar=3
+nbReal=1000000
+variable0=V;7;4.9990;0.0032
+variable1=I;7;19.6610e-3;0.0095e-3
+variable2=phi;7;1.04446;0.00075
+expression=(V/I)*cos(phi)
+outputFile=./UserData/0841e06480f3b702a92425307bce623d4d7243701c407b97247b31d9e8c756de/results
+symmetrical=false
+correlation=true
+copula=0
+correlationValue;-0.36;0.86;-0.65

@@ -25,12 +25,12 @@ Copy the content of the repository to the root of the website.
 
 Run the following command in R to install the required R packages.
 ```R
-install.packages(c('truncnorm','triangle','nleqslv','mvtnorm','numDeriv'), repos='http://cran.rstudio.com/')
+install.packages(c('truncnorm','triangle','nleqslv','mvtnorm','numDeriv','evd','sn'), repos='http://cran.rstudio.com/')
 ```
 
 The web server must have writing access to the ```UserData``` folder.
 
-`Rscript` must be in the PATH or be specified on line 24 of `validation.php`and on line 7 of `rdtotxt.php`
+`Rscript` must be in the PATH or be specified on line 11 of `validation.php`and on line 7 of `rdtotxt.php`
 
 In some case (especially when entering samples instead of specifying distributions) the POST data can be big, we recommend the following setting in `php.ini`
  `post_max_size = 16M`
@@ -38,6 +38,14 @@ In some case (especially when entering samples instead of specifying distributio
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
 
 ## Changelog
+### version 1.4 - 2018-10-23
+  - New single window interface
+  - Improved usr workflow
+  - Added the codemirror library to add features like syntax highlighting and bracket matching  
+  - Added support for the new asymmetric distribution using skew normal distribution, or a generalized extreme value distribution.
+  - Refactoring of the R code
+  - Updated Manual
+
 ### version 1.3.5 - 2018-04-23
   - New interface with NIST header and footer
   - Added verification script [available here](https://uncertainty.nist.gov/verification.php)

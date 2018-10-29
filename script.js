@@ -7,14 +7,29 @@
 //## ===================================================================
 
 
-//variable containing the path to the User temporary data must match the $UserData in validation.php
-var UserData = "./UserData";
+//antiClickjack
+if (self === top) {
+       var antiClickjack = document.getElementById("antiClickjack");
+       antiClickjack.parentNode.removeChild(antiClickjack);
+   } else {
+       top.location = self.location;
+   }
 
 
+
+// Initial settings
 var seed = Math.floor((Math.random() * 100) + 1);
 $('#seed').val(seed.toString());
+var viewer = null;
+var resultTab=3;
+$("#tabs-1").load("about.md.html");
+$( "#tabs" ).tabs();
+$("#tabs").tabs("option", "active", 1);
+$("#tabs").fadeIn(200);
 
 var distribInfo =[];
+
+var paramBackup = null;
 
 distribInfo[1] = [
 	 "Bernoulli (Prob. of success)"
@@ -42,14 +57,59 @@ distribInfo[1] = [
 	,"Beta -- Shifted & Rescaled (Shape1, Shape2, Left, Right)"
 	,"Lognormal (Mean, StdDev)"
 	,"Sample values (between 30 and 100000)"
-	,"More choices"];
-distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0];
+	,"More choices"
+	,"Asymmetric (Median, Left uncertainty, Right uncertainty, Coverage probability)"];
+//number of parameters of each distributions
+distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0,4];
 
-var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23]
+//type of parameters for each distribution 0=mean 1=stddev 2=left 3=right 4=dof 5=shape 6=scale 7=others
+var distribParamType = [
+  [8],
+	[0,1],
+	[5,6],
+	[4],
+	[0],
+	[0,1],
+	[5,7],
+	[0,1],
+	[0,1,2,3],
+	[0,1],
+	[2,3],
+	[0,1,4],
+	[0,7,4],
+	[0,1],
+	[2,3],
+	[2,0,3],
+	[0,1],
+	[2,3],
+	[0,1],
+	[5,7],
+	[0],
+	[0,1,2,3],
+	[5,6,2,3],
+	[0,1],
+	[8],
+	[8],
+	[0,2,3,8],
+];
+
+var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23,26]
 var nbDistrib = distribInfo[1].length;
 var outputNb = 1;
 var inputNb = 0;
  $('#output1').val("x0");
+
+var editor = {};
+
+editor[1] = CodeMirror.fromTextArea(document.getElementById("output1"), {
+				matchBrackets: true,
+			});
+editor[1].setSize("50rem","10rem");
+$(editor[1].getWrapperElement()).resizable({
+  resize: function() {
+    editor.setSize($(this).width(), $(this).height());
+  }
+});
 
 $( "#inputs" ).change(changeNumberInput).change();
 $('#correlation').change(correlationChange).change();;
@@ -78,19 +138,16 @@ var getUrlParameter = function getUrlParameter(sParam) {
 var exampleFile = getUrlParameter('example');
 if (exampleFile!=undefined)
 {
-	var text = "conf/config-"+exampleFile+".um";
-	$.get(text, function( lines ) {
-		loadData(lines);
-	});
+	var text = "./conf/config-"+exampleFile+".txt";
+  loadServerConfigFile(text);
 }
-
 
 
 function changeNumberInput(){
 	newInputNb=parseInt($('#inputs').val());
 	for (var i=inputNb;i<newInputNb;i++)
 	{
-		var toInsert="<input type='text' oninput='updateNames()' maxlength='20' class='nameField'  value=x"+(i)+" id='name"+(i)+"' name='name"+(i)+"' > ";
+		var toInsert="<input type='text' oninput='updateNames()' maxlength='20' size='10' class='nameField'  value=x"+(i)+" id='name"+(i)+"' name='name"+(i)+"' > ";
 		$('#nameList').append($(toInsert));
 	}
 
@@ -128,6 +185,37 @@ function changeNumberOutput(newOut){
 			outputNb = oldOut;
 			var toInsert="<textarea class='output' name='output"+(oldOut)+"' id='output"+(oldOut)+"' height=51px ></textarea>";
 			$('#container').append($(toInsert));
+      $('#output'+(oldOut)).val($('#output'+(oldOut-1)).val());
+			editor[oldOut] = CodeMirror.fromTextArea(document.getElementById("output"+(oldOut)), {
+				matchBrackets: true,
+			});
+			editor[oldOut].setSize("50rem","10rem");
+			$(editor[oldOut].getWrapperElement()).resizable({
+			  resize: function() {
+			    editor.setSize($(this).width(), $(this).height());
+			  }
+			});
+
+			var keywordOverlay = {
+				token: function (stream, state) {
+
+					for (var i=0;i<n;i++)
+					{
+						stream.eatWhile(/[\w.]/);
+						if (stream.current() == $("input[name=name"+i+"]").val())
+							return "style1";
+
+					}
+
+					stream.next();
+					return null;
+
+
+				}
+
+			};
+			editor[oldOut].addOverlay(keywordOverlay);
+			editor[oldOut].refresh();
 		}
 	}
 	if(newOut < oldOut && newOut >=1)
@@ -136,11 +224,12 @@ function changeNumberOutput(newOut){
 		{
 			oldOut=outputNb -1;
 			outputNb = oldOut;
+			editor[outputNb+1].toTextArea();
 			($('#container textarea').last()).remove()
 		}
 	}
 
-	var toInsert="<button id='dec' type='button' onclick=removeOutput()>-</button><button id='inc' type='button' onclick=addOutput()>+</button>";
+	var toInsert="<button class='buttonOut' id='dec' type='button' onclick=removeOutput()>-</button> <button class='buttonOut' id='inc' type='button' onclick=addOutput()>+</button>";
 	$('#container').append($(toInsert));
 
 }
@@ -156,6 +245,32 @@ function updateNames(){
 	}
 	if($('#correlation').prop('checked')==true)
 		plotCorrelationTable();
+
+
+	var keywordOverlay = {
+        token: function (stream, state) {
+
+			for (var i=0;i<n;i++)
+			{
+				stream.eatWhile(/[\w.]/);
+				if (stream.current() == $("input[name=name"+i+"]").val())
+					return "style1";
+
+			}
+
+			stream.next();
+			return null;
+
+
+        }
+
+    };
+	for (var i=1;i<=outputNb;i++)
+	{
+		editor[i].addOverlay(keywordOverlay);
+		editor[i].refresh();
+	}
+
 }
 
 function sortSelect(i) {
@@ -171,11 +286,19 @@ function sortSelect(i) {
     // Grab all existing entries
     for (var i=0;i<elem.options.length;i++) tmpAry.push(elem.options[i]);
     // Sort array by text attribute
-		var tempElem = tmpAry.pop();
-		var tempElem2 = tmpAry.pop();
+
+
+		var tmpMoreChoice = tmpAry[14]; // get more choice
+		tmpAry.splice(14,1);
+		var tmpSample = tmpAry[13]; // get samples
+		tmpAry.splice(13,1);
+
+
     tmpAry.sort(function(a,b){ return (a.text < b.text)?-1:1; });
-		tmpAry.push(tempElem2);
-		tmpAry.push(tempElem);
+		tmpAry.push(tmpSample);
+		tmpAry.push(tmpMoreChoice);
+
+
 
 		// Wipe out existing elements
     while (elem.options.length > 0) elem.options[0] = null;
@@ -203,10 +326,17 @@ function sortSelectAdvance(i) {
     // Grab all existing entries
     for (var i=0;i<elem.options.length;i++) tmpAry.push(elem.options[i]);
     // Sort array by text attribute
-		var tempElem = tmpAry.pop();
-		var tempElem2 = tmpAry.pop();
+		var tmpAsym = tmpAry[26]; // get asymmetric
+		tmpAry.splice(26,1);
+		var tmpMoreChoice = tmpAry[25]; // get more choice
+		tmpAry.splice(25,1);
+		var tmpSample = tmpAry[24]; // get samples
+		tmpAry.splice(24,1);
+
     tmpAry.sort(function(a,b){ return (a.text < b.text)?-1:1; });
-		tmpAry.push(tempElem2);
+		tmpAry.push(tmpAsym);
+		tmpAry.push(tmpSample);
+
 
 		// Wipe out existing elements
     while (elem.options.length > 0) elem.options[0] = null;
@@ -224,7 +354,7 @@ function plotDistribLine(){
 
 	for (var i=inputNb;i<newInputNb;i++)
 	{
-		var toInsert="<tr class='distrib' id='distrib"+(i)+"' ><th id='label"+(i)+"'>"+$("input[name=name"+i+"]").val()+"</th><td><select id='distChoice"+(i)+"' name='distChoice"+(i)+"' onchange='plotParamLine("+(i)+")' ></select></td><td><div class='paramLine' id='param"+(i)+"' ></div></td> </tr>";
+		var toInsert="<tr class='distrib' id='distrib"+(i)+"' ><th id='label"+(i)+"'>"+$("input[name=name"+i+"]").val()+"</th><td><select class='distChoice' id='distChoice"+(i)+"' name='distChoice"+(i)+"' onchange='plotParamLine("+(i)+")' ></select></td><td><div class='paramLine' id='param"+(i)+"' ></div></td> </tr>";
 		$('#distributions').append($(toInsert));
 		sortSelect(i);
 		$( '#distChoice'+(i) ).val(7);
@@ -250,7 +380,7 @@ function plotParamLine(index){
 		nbParam =  distribInfo[2][$('#distChoice'+(index)).val()];
 		for (var i=0;i<nbParam;i++)
 		{
-			var toInsertp="<input type='text'  class='paramField"+(index)+"' size=10 value=1 name='paramField"+(index)+"-"+(i)+ "' id='paramField"+(index)+"-"+(i)+ "' > ";
+			var toInsertp="<input type='text'  class='paramField"+(index)+"' oninput='backupParameters()' size=10 value=1 name='paramField"+(index)+"-"+(i)+ "' id='paramField"+(index)+"-"+(i)+ "' > ";
 			$('#param'+(index)).append($(toInsertp));
 		}
 	}
@@ -259,8 +389,11 @@ function plotParamLine(index){
 		var toInsertp="<input type='hidden'  class='paramField"+(index)+"' size=10 value=1 name='paramField"+(index)+"-"+(0)+ "' id='paramField"+(index)+"-"+(0)+ "' > ";
 		$('#param'+(index)).append($(toInsertp));
 	}
-
 	setDefault(index ,$('#distChoice'+(index)).val());
+
+	if(paramBackup!=null && (paramBackup.length -1) >= index)	{
+		setBackup(index ,$('#distChoice'+(index)).val());
+	}
 }
 
 function setDefault(index,typeDist){
@@ -411,9 +544,26 @@ function setDefault(index,typeDist){
 			$( '#distChoice'+(index) ).val(7);
 			plotParamLine(index);
 		}
+		if(typeDist==26) //Asymmetric (Median, Left uncertainty, Right uncertainty, Coverage probability)
+		{
+			$('#paramField'+(index)+'-0').val("2277")
+			$('#paramField'+(index)+'-1').val("1041")
+			$('#paramField'+(index)+'-2').val("3988")
+			$('#paramField'+(index)+'-3').val("0.95")
+		}
 
 
 
+
+}
+function setBackup(index,typeDist){
+	for (var j = 0; j < distribParamType[$('#distChoice'+(index)).val()].length; j++) {
+		if(!isNaN(paramBackup[index][distribParamType[$('#distChoice'+(index)).val()][j]] ))
+		{
+			$('#paramField'+(index)+'-'+(j)).val(paramBackup[index][distribParamType[$('#distChoice'+(index)).val()][j]]);
+		}
+
+	}
 }
 
 
@@ -421,9 +571,11 @@ function correlationChange(){
 	if($('#correlation').prop('checked')==true)
 	{
 		plotCorrelationTable();
+    $('#correlationClass').show(200);
 	}
 	else
 	{
+    $('#correlationClass').hide(200);
 		$('#correlationTable').empty();
 		$('#copula').empty();
 		$('#copulaParam').empty();
@@ -446,11 +598,11 @@ function plotCorrelationTable(){
 		for (var j=0;j<n;j++)
 		{
 			if (i>j)
-				var toInsert="<td><input type='text' disabled  class='correlField"+i+"' size=10 value='' name='correlField"+i+"-"+j+ "' ></td> ";
+				var toInsert="<td><input type='text' disabled  class='correlField' size=10 value='' name='correlField"+i+"-"+j+ "' ></td> ";
 			if (i==j)
-				var toInsert="<td><input type='text' disabled class='correlField"+i+"' size=10 value=1 name='correlField"+i+"-"+j+ "' ></td> ";
+				var toInsert="<td><input type='text' disabled class='correlField' size=10 value=1 name='correlField"+i+"-"+j+ "' ></td> ";
 			if (i<j)
-				var toInsert="<td><input type='text'  class='correlField"+i+"' size=10  value=0  name='correlField"+i+"-"+j+ "' id='correlField"+i+"-"+j+ "' ></td> ";
+				var toInsert="<td><input type='text'  class='correlField' size=10  value=0  name='correlField"+i+"-"+j+ "' id='correlField"+i+"-"+j+ "' ></td> ";
 
 
 			$('#lineCorrel'+(i)).append($(toInsert));
@@ -546,16 +698,30 @@ function handleDragOver(evt) {
 	evt.dataTransfer.dropEffect = 'copy'; // Explicitly show this is a copy.
 }
 
-  // Setup the dnd listeners.
-	var dropZone = document.getElementById('drop_zone');
+function handleFileSelectStop(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+}
 
-	$('#drop_zone').click(function(event) {
-		$('#files').click();
-	});
+function handleDragOverStop(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+  evt.dataTransfer.dropEffect = 'none'; // Explicitly show this is a copy.
+}
 
-	dropZone.addEventListener('dragover', handleDragOver, false);
-	dropZone.addEventListener('drop', handleFileSelect, false);
-  document.getElementById('files').addEventListener('change', handleFileSelect2, false);
+document.body.addEventListener('dragover', handleDragOverStop, false);
+document.body.addEventListener('drop', handleFileSelectStop, false);
+
+// Setup the dnd listeners.
+var dropZone = document.getElementById('drop_zone');
+
+$('#drop_zone').click(function(event) {
+	$('#files').click();
+});
+
+dropZone.addEventListener('dragover', handleDragOver, false);
+dropZone.addEventListener('drop', handleFileSelect, false);
+document.getElementById('files').addEventListener('change', handleFileSelect2, false);
 
 
 
@@ -584,6 +750,11 @@ function readConfigFile(file) {
 	return;
 }
 
+function loadServerConfigFile(file) {
+  $.get(file, dataType = "text",function( lines ) {
+		loadData(lines);
+	});
+}
 
 function readSampleFile(file,dropId) {
 	var ext = (file.name).split('.').pop();
@@ -688,6 +859,8 @@ function loadData(lines) {
 	changeNumberOutput(1);
 	var value = line[1].replace(/;/g,"\r\n");
 	$('#output1').val(value);
+	editor[1].getDoc().setValue(value);
+
 	$('#container').find( 'textarea' ).keyup();
 
 	index++;
@@ -698,6 +871,7 @@ function loadData(lines) {
 		line = lines[index].split("expression=");
 		value = line[1].replace(/;/g,"\r\n");
 		$('#output'+(Out)).val(value);
+		editor[Out].getDoc().setValue(value);
 		$('#container').find( 'textarea' ).keyup();
 		index++;
 	}
@@ -748,4 +922,93 @@ function loadData(lines) {
 
 		}
 	}
+	backupParameters();
 }
+
+
+function backupParameters() {
+
+	paramBackup = new Array(inputNb);
+	for (var i = 0; i < inputNb; i++) {
+		paramBackup[i] = new Array(9);
+		for (var j = 0; j < distribParamType[$('#distChoice'+(i)).val()].length; j++) {
+			paramBackup[i][distribParamType[$('#distChoice'+(i)).val()][j]] = $('#paramField'+(i)+'-'+(j)).val();
+
+		}
+	}
+}
+
+
+
+function formSubmited() {
+	backupParameters();
+	return true;
+}
+
+
+/* attach a submit handler to the form */
+$("#input").submit(function(event) {
+
+  /* stop form from submitting normally */
+  event.preventDefault();
+
+  /* get some values from elements on the page: */
+
+  /*refresh the codemirror textarea*/
+  for (var i=1;i<=outputNb;i++)
+	{
+		editor[i].save();
+	}
+
+  var $form = $(this),
+  url = $form.attr('action');
+  dataString = $("#input").serialize();
+
+  /*Prepare result tab*/
+  var toInsert="<div id=\"tabs-"+resultTab+"\"></div>";
+  $('#tabs').append($(toInsert));
+
+
+  var toInsert=" <li><a href='#tabs-"+resultTab+"'>Results "+(resultTab-2)+"</a><span class='ui-closable-tab'>&#10006;</span></li> ";
+  $('#tabsul').append($(toInsert));
+
+  $( "#tabs" ).tabs("refresh");
+  $(function() {
+    $(".ui-closable-tab").on( "click", function() {
+      var tabContainerDiv=$(this).closest(".ui-tabs").attr("id");
+      var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+      $( "#" + panelId ).remove();
+      $("#"+tabContainerDiv).tabs("refresh");
+
+    });
+  });
+  $("#tabs").tabs("option", "active", $(".ui-tabs-nav").children().size() - 1);
+
+  var toInsert=" <div class='loader' id='loader'></div> ";
+  $("#tabs-"+resultTab).append($(toInsert));
+
+  $("input[type=submit]").attr("disabled", "disabled");
+  $("input[type=submit]").css({"opacity":"0.65","cursor":"not-allowed"});
+
+
+  /* Send the data using post */
+  var posting = $.post(url, {
+    data: dataString
+  });
+
+  /* Put the results in a div */
+  posting.done(function(data) {
+    $("input[type=submit]").removeAttr("disabled");
+    $("input[type=submit]").css({"opacity":"1","cursor":"pointer"});
+
+    $("#tabs-"+resultTab).empty().append(data);
+
+    var ID = $("#tabs-"+resultTab ).find("#resultsData").data("id");
+    var outputNb = $("#tabs-"+resultTab ).find("#resultsData").data("output");
+    if(ID != undefined)
+    {
+      resultsDisplay(resultTab,ID,outputNb);
+    }
+    resultTab = resultTab+1;
+  });
+});
