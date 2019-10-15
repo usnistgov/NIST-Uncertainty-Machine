@@ -81,7 +81,7 @@ if (!empty($_POST))
 	//Checking of the parameters
 	if (!preg_match("/^[0-9]+?$/",preg_replace('/\s+/', '',$params["seed"])))
 	{
-		echo "<pre>The random number generator seed is not a valid number <br /></pre>";
+		echo "<pre><span data-mlr-text>The random number generator seed is not a valid number</span> <br /></pre>";
 		$validInputs=FALSE;
 	}
 
@@ -89,7 +89,7 @@ if (!empty($_POST))
 	{
 		if (!preg_match("/^[A-Za-z]+[A-Za-z0-9_.]*$/",trim($params["name{$i}"])))
 		{
-			echo "<pre>The quantity name \"".trim($params["name{$i}"])."\" is not a valid name<br /></pre>";
+			echo "<pre><span data-mlr-text>The quantity name</span> \"".trim($params["name{$i}"])."\" <span data-mlr-text>is not a valid name</span><br /></pre>";
 			$validInputs=FALSE;
 		}
 	}
@@ -104,7 +104,7 @@ if (!empty($_POST))
 
 				if (!preg_match("/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/",preg_replace('/\s+/', '', $params["paramField{$i}-{$k}"])))
 				{
-					echo "<pre>The parameter \"".trim($params["paramField{$i}-{$k}"])."\" of the quantity \"".trim($params["name{$i}"])."\" is not a valid number<br /></pre>";
+					echo "<pre><span data-mlr-text>The parameter</span> \"".trim($params["paramField{$i}-{$k}"])."\" <span data-mlr-text>of the quantity</span> \"".trim($params["name{$i}"])."\" <span data-mlr-text>is not a valid number</span><br /></pre>";
 					$validInputs=FALSE;
 				}
 			}
@@ -113,7 +113,7 @@ if (!empty($_POST))
 
 	if (!preg_match("/^[+]?[0-9]+((\.[0-9]*)?[eE][+-]?[0-9]+)?$/",preg_replace('/\s+/', '',$params["nReal"])))
 	{
-		echo "<pre>The number of realizations field is not a valid number <br /></pre>";
+		echo "<pre><span data-mlr-text>The number of realizations field is not a valid number</span> <br /></pre>";
 		$validInputs=FALSE;
 	}
 
@@ -123,7 +123,7 @@ if (!empty($_POST))
 		{
 			if (!preg_match("/^[+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/",preg_replace('/\s+/', '',$params['copulaField1'])))
 			{
-				echo "<pre>The number of degrees of freedom of the copula is not a valid number <br /></pre>";
+				echo "<pre><pre><span data-mlr-text>The number of degrees of freedom of the copula is not a valid number</span> <br /></pre>";
 				$validInputs=FALSE;
 			}
 		}
@@ -133,7 +133,7 @@ if (!empty($_POST))
 			{
 				if (!preg_match("/^[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)?$/",preg_replace('/\s+/', '', $params["correlField{$i}-{$j}"])))
 				{
-					echo "<pre>The correlation value \"".preg_replace('/\s+/', '', $params["correlField{$i}-{$j}"])."\" is not a valid number <br /></pre>";
+					echo "<pre><span data-mlr-text>The correlation value</span> \"".preg_replace('/\s+/', '', $params["correlField{$i}-{$j}"])."\" <span data-mlr-text>is not a valid number</span> <br /></pre>";
 					$validInputs=FALSE;
 				}
 
@@ -145,7 +145,7 @@ if (!empty($_POST))
 	{
 		if(!isset($params["output{$i}"]) || trim($params["output{$i}"])==='')
 		{
-			echo "<pre>The output quantity {$i} is empty or not valid<br /></pre>";
+			echo "<pre><span data-mlr-text>The output quantity</span> {$i} <span data-mlr-text>is empty or not valid</span><br /></pre>";
 			$validInputs=FALSE;
 		}
 	}

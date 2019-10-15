@@ -36,8 +36,10 @@ In some case (especially when entering samples instead of specifying distributio
  `post_max_size = 16M`
 
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
-
 ## Changelog
+### version 1.4.1 - 2019-02-27
+ - Translation in several languages
+
 ### version 1.4 - 2018-10-23
   - New single window interface
   - Improved usr workflow

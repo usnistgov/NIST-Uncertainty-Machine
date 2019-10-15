@@ -22,7 +22,7 @@ var seed = Math.floor((Math.random() * 100) + 1);
 $('#seed').val(seed.toString());
 var viewer = null;
 var resultTab=3;
-$("#tabs-1").load("about.md.html");
+$("#tabs-1").load("about/about_English.md.html");
 $( "#tabs" ).tabs();
 $("#tabs").tabs("option", "active", 1);
 $("#tabs").fadeIn(200);
@@ -278,7 +278,7 @@ function sortSelect(i) {
  		var elem = document.getElementById( 'distChoice'+(i) );
 		for (var j=0;j<nbDistrib;j++)
 		{
-			var toInserto="<option value="+j+">"+distribInfo[1][j]+"</option>";
+			var toInserto="<option value="+j+" data-mlr-text>"+distribInfo[1][j]+"</option>";
 			if (distribAdvance.indexOf(j) == -1)
 				$('#distChoice'+(i)).append($(toInserto));
 		}
@@ -319,7 +319,7 @@ function sortSelectAdvance(i) {
 
 		for (var j=0;j<nbDistrib;j++)
 		{
-			var toInserto="<option value="+j+">"+distribInfo[1][j]+"</option>";
+			var toInserto="<option value="+j+" data-mlr-text>"+distribInfo[1][j]+"</option>";
 			$('#distChoice'+(i)).append($(toInserto));
 		}
     var tmpAry = [];
@@ -394,6 +394,10 @@ function plotParamLine(index){
 	if(paramBackup!=null && (paramBackup.length -1) >= index)	{
 		setBackup(index ,$('#distChoice'+(index)).val());
 	}
+  if (langURL!=undefined)
+  {
+    checkLanguage();
+  }
 }
 
 function setDefault(index,typeDist){
@@ -969,10 +973,14 @@ $("#input").submit(function(event) {
   $('#tabs').append($(toInsert));
 
 
-  var toInsert=" <li><a href='#tabs-"+resultTab+"'>Results "+(resultTab-2)+"</a><span class='ui-closable-tab'>&#10006;</span></li> ";
+  var toInsert=" <li><a href='#tabs-"+resultTab+"'><span data-mlr-text>Results</span>"+" "+(resultTab-2)+"</a><span class='ui-closable-tab'>&#10006;</span></li> ";
   $('#tabsul').append($(toInsert));
 
   $( "#tabs" ).tabs("refresh");
+  if (langURL!=undefined)
+  {
+    checkLanguage();
+  }
   $(function() {
     $(".ui-closable-tab").on( "click", function() {
       var tabContainerDiv=$(this).closest(".ui-tabs").attr("id");
@@ -1008,7 +1016,20 @@ $("#input").submit(function(event) {
     if(ID != undefined)
     {
       resultsDisplay(resultTab,ID,outputNb);
+
     }
+    checkLanguage();
+
     resultTab = resultTab+1;
   });
 });
+
+var langURL = getUrlParameter('lang');
+var oldLangURL = getUrlParameter('lang');
+
+createMLDrop();
+if (langURL!=undefined)
+{
+	mlrLangInUse = langURL;
+	checkLanguage();
+}
