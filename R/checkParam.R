@@ -298,12 +298,12 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 		if(eta<=0) {
 			errorStop(
 				paste("In quantity ", varNames,
-					  ": Mean must be greater than 0"),
+					  ": The mean must be positive"),
 				outputFile) }
 		if(tau<=0) {
 			errorStop(
 				paste("In quantity ", varNames,
-				": StdDev must be greater than 0"),
+				": StdDev must be positive"),
 				outputFile) }
 	}
 
@@ -318,7 +318,7 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 		if(sampleSize>100000) {
 			errorStop(
 				paste("In quantity ", varNames,
-				": The number of sample must be smaller than 100000"),
+				": The number of sample must be smaller than 100 000"),
 				outputFile) }
 	}
 	if(type==26) ## Asymmetric (Median, Left uncertainty, Right uncertainty, Coverage probability)

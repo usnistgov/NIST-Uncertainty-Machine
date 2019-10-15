@@ -4,16 +4,18 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+	<meta name="description" content="The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty">
+
 	<title>NIST Uncertainty Machine</title>
 	<link rel="stylesheet" type="text/css" href="./library/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="./library/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="./style.css?v1.4">
+	<link rel="stylesheet" type="text/css" href="./style.css?v1.4.1">
 
 	<script src="./library/codemirror.js"></script>
 	<script src="./library/matchbrackets.js"></script>
 	<script src="./library/r.js"></script>
 
-	<link rel="shortcut icon" href="Uncertainty.ico">
+	<link rel="shortcut icon" href="favicon.ico">
 	<style id="antiClickjack">body{display:none !important;}</style>
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -24,7 +26,7 @@
 	gtag('js', new Date());
 	gtag('config', 'UA-114254568-1');
 	</script>
-	
+
 </head>
 <body>
 	<div class="nist-header">
@@ -35,7 +37,7 @@
 		</div>
 		<div class="nist-header__title">
 			<h4 class="title" >Uncertainty Machine</h4>
-			<h5 class="title" >Version 1.4</h5>
+			<h5 class="title" ><select id="mbPOCControlsLangDrop"></select>Version 1.4.1</h5>
 		</div>
 	</div>
 	<div class="content">
@@ -53,19 +55,17 @@
 					<form name="input" id="input"   action="validation.php"   >
 
 						<fieldset  class="mainFieldset" >
-							<legend class="mainLegend">Introduction</legend>
+							<legend class="mainLegend"><span data-mlr-text>Introduction</span></legend>
 							<div class="columnContainer">
 								<div class="columnLeft">
 
-									<p>
-										The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an
-										output quantity defined by a measurement model of the form <code>y = f(x<sub>0</sub>,...,x<sub>n</sub>)</code>.
+									<p><span data-mlr-text>The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an	output quantity defined by a measurement model of the form</span> <code>y = f(x<sub>0</sub>,...,x<sub>n</sub>)</code>.
 									</p>
 									<p>
-										User's manual available <a href="./NISTUncertaintyMachine-UserManual.pdf"> here.</a>
-									</p>
+									<span data-mlr-text>User's manual available</span> <a  href="./NISTUncertaintyMachine-UserManual.pdf"> <span data-mlr-text>here</span>.</a>
+								</p>
 									<div class="dropdown">
-										<a href="#" class="dropbtn">Load examples</a>
+										<a href="#" class="dropbtn"><span data-mlr-text>Load examples</span></a>
 										<div class="dropdown-content">
 											<a href="#" onClick="loadServerConfigFile('./conf/config-Gauge.txt')">Gauge</a>
 											<a href="#" onClick="loadServerConfigFile('./conf/config-Resistance.txt')">Resistance</a>
@@ -80,7 +80,7 @@
 								</div>
 								<div class = "columnRight" id="load">
 
-									<div id="drop_zone">Drop configuration file here or click to upload</div>
+									<div id="drop_zone" data-mlr-text>Drop configuration file here or click to upload</div>
 									<input type='file' title="No file selected" id="files" onchange="pressed()"><label id="fileLabel"> </label>
 									<p>
 										<input id="reset" type="button" value="Reset" onClick="loadServerConfigFile('./conf/config-Reset.txt')">
@@ -90,8 +90,8 @@
 
 						</fieldset>
 						<fieldset  class="mainFieldset" id="mainDistrib">
-							<legend class="mainLegend">1. Select Inputs & Choose Distributions</legend>
-							<div>Number of input quantities:
+							<legend class="mainLegend"><span data-mlr-text>1. Select Inputs & Choose Distributions</span></legend>
+							<div><span data-mlr-text>Number of input quantities:</span>
 								<select id="inputs" name="inputs">
 									<option value="1" selected> 1</option>
 									<option value="2"> 2</option>
@@ -110,7 +110,7 @@
 									<option value="15"> 15</option>
 								</select>
 							</div>
-							<p id="nameHeader">Names of input quantities:
+							<p id="nameHeader"><span data-mlr-text>Names of input quantities:</span>
 								<div id="nameList">
 								</div>
 							</p>
@@ -119,7 +119,7 @@
 								</table>
 							</div>
 
-							Correlations
+							<span data-mlr-text>Correlations</span>
 							<label class="switch">
 										<input type="checkbox"  name="correlation" id="correlation" value="bar" />
 										<span class="slider round" id="correlation"></span>
@@ -144,14 +144,15 @@
 							</div>
 						</fieldset>
 						<fieldset  class="mainFieldset" >
-							<legend class="mainLegend">2. Choose Options</legend>
-							<div>Number of realizations of the output quantity:
+							<legend class="mainLegend"><span data-mlr-text>2. Choose Options</span></legend>
+							<div><span data-mlr-text>Number of realizations of the output quantity:</span>
 								<input name='nReal' id='nReal' type='text' value='1000000'  >
 							</div>
-							<div>Random number generator seed:
+							<div><span data-mlr-text>Random number generator seed:</span>
+
 								<input name='seed' id='seed' type='text' value='' size="4" >
 							</div>
-							Symmetrical coverage intervals
+							<span data-mlr-text>Symmetrical coverage intervals</span>
 							<label class="switch">
 										<input type="checkbox"  name="symmetrical" id="symmetrical" value="bar" />
 										<span class="slider round" id="symmetrical"></span>
@@ -160,15 +161,15 @@
 							<br/>
 						</fieldset>
 						<fieldset  class="mainFieldset" >
-							<legend class="mainLegend">3. Write the Definition of Output Quantity</legend>
+							<legend class="mainLegend"><span data-mlr-text>3. Write the Definition of Output Quantity</span></legend>
 							<div id="container">
-								Definition of output quantity (R expression):
+								<span data-mlr-text>Definition of output quantity (R expression):</span>
 								<textarea class='output'  name='output1' id='output1' height=51px ></textarea>
 								<button class='buttonOut' id='dec' type="button" onclick=removeOutput()>-</button>
 								<button class='buttonOut' id='inc' type="button" onclick=addOutput()>+</button>
 							</div>
 						</fieldset>
-						<input type="submit" value="Run the computation"/>
+						<input type="submit" id = "submit" value="Run the computation"/>
 					</form>
 				</div>
 			</div>
@@ -237,8 +238,9 @@
 
 	<script src="library/jquery.js"></script>
 	<script src="library/jquery-ui.min.js"></script>
-	<script src="results.js?v1.4"></script>
-	<script src="script.js?v1.4"></script>
+	<script src="language.js?v1.4.1"></script>
+	<script src="results.js?v1.4.1"></script>
+	<script src="script.js?v1.4.1"></script>
 
 
 

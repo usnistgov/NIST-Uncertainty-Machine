@@ -64,6 +64,20 @@ h3{
 	margin-left:2cm;
 }
 
+
+
+h5>select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  position: absolute;
+  top: 6px;
+  right: 10rem;
+
+
+}
+
 .mainLegend
 {
 	font-weight: bold;

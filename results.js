@@ -21,13 +21,17 @@ function resultsDisplay(resultTab,ID,outputNb) {
 		$("#tabs-"+resultTab ).find("#density").append($(toInsert));
 
 		var text = UserData+"/"+ID+"/results-results.txt?"+d.getTime();
-		$("#tabs-"+resultTab ).find("#resultsText").load(text);
+		$("#tabs-"+resultTab ).find("#resultsText").load(text, function(){
+			if(langURL !="English")
+				checkResultsLanguageTab(langURL,resultTab);
+		});
+
 	}
 	else
 	{
     $("#tabs-"+resultTab ).empty();
 
-		var toInsert= "<fieldset class='mainFieldset' id='sharedOuputs'  style = 'display: none;'><legend class='mainLegend'>Shared Ouputs </legend> <div id='downloadAll'></div></fieldset>";
+		var toInsert= "<fieldset class='mainFieldset' id='sharedOuputs'  style = 'display: none;'><legend class='mainLegend'><span data-mlr-text>Shared Outputs</span></legend> <div id='downloadAll'></div></fieldset>";
 		$("#tabs-"+resultTab ).append($(toInsert));
 
 
@@ -41,22 +45,20 @@ function resultsDisplay(resultTab,ID,outputNb) {
 
     for(var i = 1; i <= outputNb; i++)
     {
+			var resultloaded =0;
       var density = UserData+"/"+ID+"/results"+i+"-density.jpg?"+d.getTime();
       $("#tabs-"+resultTab ).find("#density"+i).hide();
       var toInsert="<img src=\""+density+"\"  width=\"100%\" height=\"100%\"  onload=\"linksTabDisplay("+resultTab+","+i+ ",'"+ID+"')\"> ";
       $("#tabs-"+resultTab ).find("#density"+i).append($(toInsert));
       var text = UserData+"/"+ID+"/results"+i+"-results.txt?"+d.getTime();
-      $("#tabs-"+resultTab ).find("#resultsText"+i).load(text);
+			$("#tabs-"+resultTab ).find("#resultsText"+i).load(text, function(){
+				resultloaded = resultloaded+1;
+				if(resultloaded == outputNb && langURL !="English")
+	  			checkResultsLanguageTab(langURL,resultTab);
+			});
     }
 
-
-
-
 	}
-
-
-
-
 }
 
 function linksDisplay(resultTab,ID){
@@ -67,21 +69,21 @@ function linksDisplay(resultTab,ID){
 	var config = UserData+"/"+ID+"/config.um?"+d.getTime();
 	var text = UserData+"/"+ID+"/results-results.txt?"+d.getTime();
 
-	var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\">  Download binary R data file with Monte Carlo values of output quantity  </a><br/>     ";
+	var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\">  <span data-mlr-text>Download binary R data file with Monte Carlo values of output quantity</span>  </a><br/>     ";
 	$("#tabs-"+resultTab ).find("#download").append($(toInsert));
 
-	var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> Download a text file with Monte Carlo values of output quantity </a> <br/>     ";
+	var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> <span data-mlr-text>Download a text file with Monte Carlo values of output quantity</span> </a> <br/>     ";
 	$("#tabs-"+resultTab ).find("#download").append($(toInsert));
 
-	var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> Download text file with numerical results shown on this page </a>  <br/>  ";
+	var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download text file with numerical results shown on this page</span> </a>  <br/>  ";
 	$("#tabs-"+resultTab ).find("#download").append($(toInsert));
 
-	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\"> Download JPEG file with plot shown on this page </a> <br/>    ";
+	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download JPEG file with plot shown on this page</span> </a> <br/>    ";
 	$("#tabs-"+resultTab ).find("#download").append($(toInsert));
 
-	var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> Download configuration file </a>   ";
+	var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download configuration file</span> </a>   ";
 	$("#tabs-"+resultTab ).find("#download").append($(toInsert));
-
+	checkLanguage();
 }
 
 
@@ -93,7 +95,7 @@ function linksTabDisplay(resultTab, i,ID){
 	var d = new Date();
 	var density = UserData+"/"+ID+"/results"+i+"-density.jpg?"+d.getTime();
 
-	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\" style='margin-left: 19px;'> Download JPEG file of this plot </a> <br/>    ";
+	var toInsert="<a download=\"density.jpg\" href=\""+density+"\" type=\"application/octet-stream\" style='margin-left: 19px;'> <span data-mlr-text>Download JPEG file of this plot</span> </a> <br/>    ";
 	$("#tabs-"+resultTab ).find('#download'+(i)).append($(toInsert));
 
   var values = UserData+"/"+ID+"/resultsAll-values.Rd";
@@ -105,20 +107,20 @@ function linksTabDisplay(resultTab, i,ID){
   {
     $("#tabs-"+resultTab ).find('#sharedOuputs').show();
 
-    var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\"> Download binary R data file with Monte Carlo values all output quantities </a> <br/>     ";
+    var toInsert="<a download=\"values.Rd\" href=\""+values+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download binary R data file with Monte Carlo values all output quantities</span> </a> <br/>     ";
     $("#tabs-"+resultTab ).find('#downloadAll').append($(toInsert));
 
-    var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> Download a text file with Monte Carlo values of all output quantities </a> <br/>     ";
+    var toInsert="<a   href=\"rdtotxt.php?outFile="+values+" \"> <span data-mlr-text>Download a text file with Monte Carlo values of all output quantities</span> </a> <br/>     ";
     $("#tabs-"+resultTab ).find('#downloadAll').append($(toInsert));
 
-    var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> Download text file with numerical results </a>  <br/>  ";
+    var toInsert="<a download=\"results.txt\"  href=\""+text+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download text file with numerical results</span> </a>  <br/>  ";
     $("#tabs-"+resultTab ).find('#downloadAll').append($(toInsert));
 
-    var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> Download configuration file </a>   ";
+    var toInsert="<a  download=\"config.um\" href=\""+config+"\" type=\"application/octet-stream\"> <span data-mlr-text>Download configuration file</span> </a>   ";
     $("#tabs-"+resultTab ).find('#downloadAll').append($(toInsert));
 
   }
 
 
-
+checkLanguage();
 }
