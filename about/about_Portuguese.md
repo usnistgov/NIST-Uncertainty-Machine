@@ -27,7 +27,7 @@ A saída da Máquina de Incerteza do NIST consiste de :
 incerteza da saída
 
 Para obter detalhes sobre a Máquina de incerteza do NIST e exemplos da
-sua aplicação, consulte o manual do usuário, disponível aqui, e
+sua aplicação, consulte o manual do usuário, disponível [aqui](./NISTUncertaintyMachine-UserManual.pdf), e
 T. Lafarge e A. Possolo (2015) "The NIST Uncertainty Machine", NCSLI
 Measure Journal of Measurement Science, volume 10, número 3
 (setembro), páginas 20-27.
@@ -98,7 +98,7 @@ corresponder à versão do NUM exibida na parte superior da página do
 aplicativo da Web.
 
 ### Descarregar
-  *   [NIST Validation & Verification Script Version 1.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.4.R)
-  *   [NIST Validation & Verification Script Version 1.3.6](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.6.R)
-  *   [NIST Validation & Verification Script Version 1.3.5](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.5.R)
-  *   [NIST Validation & Verification Script Version 1.3.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.4.R)
+  *   [NIST Validation & Verification Script Version 1.4](./FullScriptNUM/FullScriptNUM_1.4.R)
+  *   [NIST Validation & Verification Script Version 1.3.6](./FullScriptNUM/FullScriptNUM_1.3.6.R)
+  *   [NIST Validation & Verification Script Version 1.3.5](./FullScriptNUM/FullScriptNUM_1.3.5.R)
+  *   [NIST Validation & Verification Script Version 1.3.4](./FullScriptNUM/FullScriptNUM_1.3.4.R)

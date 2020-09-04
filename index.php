@@ -9,7 +9,7 @@
 	<title>NIST Uncertainty Machine</title>
 	<link rel="stylesheet" type="text/css" href="./library/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="./library/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="./style.css?v1.4.1">
+	<link rel="stylesheet" type="text/css" href="./style.css?v1.4.2">
 
 	<script src="./library/codemirror.js"></script>
 	<script src="./library/matchbrackets.js"></script>
@@ -37,7 +37,7 @@
 		</div>
 		<div class="nist-header__title">
 			<h4 class="title" >Uncertainty Machine</h4>
-			<h5 class="title" ><select id="mbPOCControlsLangDrop"></select>Version 1.4.1</h5>
+			<h5 class="title" ><select id="mbPOCControlsLangDrop"></select>Version 1.4.2</h5>
 		</div>
 	</div>
 	<div class="content">
@@ -238,9 +238,9 @@
 
 	<script src="library/jquery.js"></script>
 	<script src="library/jquery-ui.min.js"></script>
-	<script src="language.js?v1.4.1"></script>
-	<script src="results.js?v1.4.1"></script>
-	<script src="script.js?v1.4.1"></script>
+	<script src="language.js?v1.4.2"></script>
+	<script src="results.js?v1.4.2"></script>
+	<script src="script.js?v1.4.2"></script>
 
 
 

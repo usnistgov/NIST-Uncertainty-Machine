@@ -990,7 +990,7 @@ $("#input").submit(function(event) {
 
     });
   });
-  $("#tabs").tabs("option", "active", $(".ui-tabs-nav").children().size() - 1);
+  $("#tabs").tabs("option", "active", $(".ui-tabs-nav").children().length - 1);
 
   var toInsert=" <div class='loader' id='loader'></div> ";
   $("#tabs-"+resultTab).append($(toInsert));

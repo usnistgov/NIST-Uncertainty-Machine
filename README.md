@@ -37,6 +37,11 @@ In some case (especially when entering samples instead of specifying distributio
 
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
 ## Changelog
+
+### version 1.4.2 - 2020-05
+ - Fix Student-t degree of freedom between 0 and 2
+ - Improve manual and About page
+
 ### version 1.4.1 - 2019-02-27
  - Translation in several languages
 

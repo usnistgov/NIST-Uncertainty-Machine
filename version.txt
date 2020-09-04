@@ -1,4 +1,4 @@
-1.4.1
+1.4.2
 This software was developed at NIST. This software is not subject to copyright protection and is
 in the public domain. This software is an experimental system. NIST assumes
 no responsibility whatsoever for its use by other parties, and makes no

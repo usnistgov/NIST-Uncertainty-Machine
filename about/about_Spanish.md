@@ -33,7 +33,7 @@ de la salida.
 
 Para obtener detalles sobre la Máquina de Incertidumbre del NIST
 y ejemplos de su aplicación, consulte su manual de usuario,
-disponible aquí, y a T. Lafarge y A. Possolo (2015) "La Máquina
+disponible [aqui](./NISTUncertaintyMachine-UserManual.pdf), y a T. Lafarge y A. Possolo (2015) "La Máquina
 de Incertidumbre del NIST", NCSLI Measure Journal of Measurement
 Science, volumen 10, número 3 (septiembre), páginas 20-27.
 
@@ -113,7 +113,7 @@ que se muestra en la parte superior de la página de la aplicación
 web.
 
 ### Descarregar
-  *   [NIST Validation & Verification Script Version 1.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.4.R)
-  *   [NIST Validation & Verification Script Version 1.3.6](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.6.R)
-  *   [NIST Validation & Verification Script Version 1.3.5](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.5.R)
-  *   [NIST Validation & Verification Script Version 1.3.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.4.R)
+  *   [NIST Validation & Verification Script Version 1.4](./FullScriptNUM/FullScriptNUM_1.4.R)
+  *   [NIST Validation & Verification Script Version 1.3.6](./FullScriptNUM/FullScriptNUM_1.3.6.R)
+  *   [NIST Validation & Verification Script Version 1.3.5](./FullScriptNUM/FullScriptNUM_1.3.5.R)
+  *   [NIST Validation & Verification Script Version 1.3.4](./FullScriptNUM/FullScriptNUM_1.3.4.R)

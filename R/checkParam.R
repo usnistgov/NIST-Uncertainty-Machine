@@ -128,8 +128,11 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 	{
 		if(parameters[2]<=0)
 			errorStop(paste("In quantity ",varNames,": StdDev must be positive"), outputFile)
-		if(parameters[3]<=2)
-			errorStop(paste("In quantity ",varNames,": No. of degrees of freedom must be greater than 2"), outputFile)
+		if(parameters[3]<=0)
+			errorStop(paste("In quantity ",varNames,": No. of degrees of freedom must be positive"), outputFile)
+		if(parameters[3]<=2 && parameters[3]>0 )
+			errorStop(paste("In quantity ",varNames,": Student's t distribution with ", parameters[3], " degrees of freedom has infinite variance"), outputFile)
+
 	}
 	if(type==12) ## Student t (Center, Scale, DF)
 	{
@@ -137,6 +140,7 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 			errorStop(paste("In quantity ",varNames,": Scale must be positive"), outputFile)
 		if(parameters[3]<=0)
 			errorStop(paste("In quantity ",varNames,": No. of degrees of freedom must be positive"), outputFile)
+
 	}
 
 

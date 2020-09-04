@@ -13,7 +13,7 @@ Les résultats de la NUM comprennent :
 * Un budget d’incertitude, qui quantifie l’influence que les incertitudes des entrées ont sur l'incertitude de la sortie
 
 
-Pour plus de détails sur la NUM et des exemples de son application, veuillez vous reporter à son manuel d'utilisation, disponible [ici] (./ NISTUncertaintyMachine-UserManual.pdf), ainsi qu'à T. Lafarge et A. Possolo (2015) "The NIST Uncertainty Machine ",  NCSLI Measure Journal of Measurement Science, volume 10, numéro 3 (septembre), pages 20-27.
+Pour plus de détails sur la NUM et des exemples de son application, veuillez vous reporter à son manuel d'utilisation, disponible [ici](./NISTUncertaintyMachine-UserManual.pdf), ainsi qu'à T. Lafarge et A. Possolo (2015) "The NIST Uncertainty Machine ",  NCSLI Measure Journal of Measurement Science, volume 10, numéro 3 (septembre), pages 20-27.
 
 Le NIST est l'institut national de métrologie des États-Unis d'Amérique. Rendez-nous visite à www.nist.gov. Fondé en 1901, le NIST est un organisme fédéral non réglementé, relevant du Département du commerce des États-Unis. La mission du NIST est de promouvoir l’innovation et la compétitivité industrielle aux États-Unis, en faisant progresser la science de la mesure, les normes et la technologie, de manière à renforcer la sécurité économique et à améliorer notre qualité de vie.
 
@@ -54,7 +54,7 @@ Le script installera tous les packages R nécessaires qui n'avaient peut-être p
 
 
 ### Télécharger
-  *   [NIST Validation & Verification Script Version 1.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.4.R)
-  *   [NIST Validation & Verification Script Version 1.3.6](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.6.R)
-  *   [NIST Validation & Verification Script Version 1.3.5](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.5.R)
-  *   [NIST Validation & Verification Script Version 1.3.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.4.R)
+  *   [NIST Validation & Verification Script Version 1.4](./FullScriptNUM/FullScriptNUM_1.4.R)
+  *   [NIST Validation & Verification Script Version 1.3.6](./FullScriptNUM/FullScriptNUM_1.3.6.R)
+  *   [NIST Validation & Verification Script Version 1.3.5](./FullScriptNUM/FullScriptNUM_1.3.5.R)
+  *   [NIST Validation & Verification Script Version 1.3.4](./FullScriptNUM/FullScriptNUM_1.3.4.R)

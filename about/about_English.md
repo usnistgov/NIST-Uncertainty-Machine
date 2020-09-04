@@ -1,6 +1,7 @@
 ![NIST](https://nccoe.nist.gov/sites/all/themes/custom/nccoe2x/asset/img/NIST_logo.svg)
 # NIST Uncertainty Machine
 
+ [Click here to download a copy of the User's Manual.](./NISTUncertaintyMachine-UserManual.pdf)
 
 The NIST Uncertainty Machine is a web-based software application produced by the National Institute of Standards and Technology ([NIST](www.nist.gov)) to evaluate the measurement uncertainty associated with a scalar or vectorial output quantity that is a known and explicit function of a set of scalar input quantities for which estimates and evaluations of measurement uncertainty are available.
 
@@ -13,7 +14,7 @@ The output of the NIST Uncertainty Machine comprises:
  * Coverage intervals for the true value of the measurand
  * An uncertainty budget that quantifies the influence that the uncertainties of the inputs have upon the uncertainty of the output
 
-For details about the NIST Uncertainty Machine, and examples of its application, please refer to its user's manual, available [Here](./NISTUncertaintyMachine-UserManual.pdf), and to T. Lafarge and A. Possolo (2015) "The NIST Uncertainty Machine", NCSLI Measure Journal of Measurement Science, volume 10, number 3 (September), pages 20-27.
+For details about the NIST Uncertainty Machine, and examples of its application, please refer to its user's manual, and to T. Lafarge and A. Possolo (2015) "The NIST Uncertainty Machine", NCSLI Measure Journal of Measurement Science, volume 10, number 3 (September), pages 20-27.
 
 NIST is the national metrology institute of the United States of America. Visit us at www.nist.gov. Founded in 1901, NIST is a non-regulatory federal agency within the U.S. Department of Commerce. NIST's mission is to promote U.S. innovation and industrial competitiveness by advancing measurement science, standards, and technology in ways that enhance economic security and improve our quality of life.
 
@@ -53,7 +54,8 @@ The script will install any necessary R packages that may not have been previous
 The script will install any necessary R packages that may not have been previously installed in the local version of the R system. The script first writes its version number onto the terminal window, which should be matched to the version of the NUM displayed at the top of the page of the web application.
 
 ### Download
-  *   [NIST Validation & Verification Script Version 1.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.4.R)
-  *   [NIST Validation & Verification Script Version 1.3.6](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.6.R)
-  *   [NIST Validation & Verification Script Version 1.3.5](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.5.R)
-  *   [NIST Validation & Verification Script Version 1.3.4](https://uncertainty.nist.gov/FullScriptNUM/FullScriptNUM_1.3.4.R)
+  *   [NIST Validation & Verification Script Version 1.4.2](./FullScriptNUM/FullScriptNUM_1.4.2.R)
+  *   [NIST Validation & Verification Script Version 1.4](./FullScriptNUM/FullScriptNUM_1.4.R)
+  *   [NIST Validation & Verification Script Version 1.3.6](./FullScriptNUM/FullScriptNUM_1.3.6.R)
+  *   [NIST Validation & Verification Script Version 1.3.5](./FullScriptNUM/FullScriptNUM_1.3.5.R)
+  *   [NIST Validation & Verification Script Version 1.3.4](./FullScriptNUM/FullScriptNUM_1.3.4.R)

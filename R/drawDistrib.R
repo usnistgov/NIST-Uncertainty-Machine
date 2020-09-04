@@ -135,7 +135,7 @@ drawDistrib = function(type,parameters,varNames,varEnv,errorFile,ii)
 		if (parameters[[ii]][3] > 2)
 			sdX = parameters[[ii]][2] * sqrt(parameters[[ii]][3]/(parameters[[ii]][3]-2))
 		else
-			sdX = Inf
+			sdX = parameters[[ii]][2]
 
 	}
 
@@ -407,7 +407,7 @@ drawDistribCorel = function(type,parameters,varNames,z,varEnv,errorFile,ii)
 		if (parameters[[ii]][3] > 2)
 			sdX = parameters[[ii]][2] * sqrt(parameters[[ii]][3]/(parameters[[ii]][3]-2))
 		else
-			sdX = Inf
+			sdX = parameters[[ii]][2]
 
 	}
 	if(type[ii]==13) ## Triangular -- Symmetric (Mean, StdDev)
