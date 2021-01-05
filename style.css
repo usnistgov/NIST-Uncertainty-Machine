@@ -78,6 +78,10 @@ h5>select{
 
 }
 
+code{
+  white-space: nowrap;
+}
+
 .mainLegend
 {
 	font-weight: bold;

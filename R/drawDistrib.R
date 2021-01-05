@@ -283,6 +283,35 @@ drawDistrib = function(type,parameters,varNames,varEnv,errorFile,ii)
 		sdX = mad(varTemp);
 
 	}
+	
+	if(type[ii]==27) ## Binomial (Size, Probability)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  varTemp=rbinom(nbReal, size=parameters[[ii]][1], prob=parameters[[ii]][2])*1.0
+	  meanX = parameters[[ii]][1]*parameters[[ii]][2] # N*p
+	  sdX   = sqrt(parameters[[ii]][1]*parameters[[ii]][2]*(1 - parameters[[ii]][2])) #sqrt(N*p*(1-p))
+	}
+	
+	if(type[ii]==28) ## Negative Binomial (Mean, Dispersion)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  mu = parameters[[ii]][1]
+	  phi = parameters[[ii]][2]
+	  varTemp=rnbinom(n=nbReal, size=phi, mu=mu)*1.0
+	  meanX = mu
+	  sdX   = sqrt(mu*(1+mu/phi))
+	  remove(mu,phi)
+	}
+	
+	if(type[ii]==29) ## Poisson (rate)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  lambda = parameters[[ii]][1]
+	  varTemp=rpois(n=nbReal, lambda=lambda)*1.0
+	  meanX = lambda
+	  sdX   = sqrt(lambda)
+	  remove(lambda)
+	}
 
 
 	varEnv$varTemp=varTemp
@@ -559,6 +588,34 @@ drawDistribCorel = function(type,parameters,varNames,z,varEnv,errorFile,ii)
 		sdX = mad(varTemp);
 
 	}
+	if(type[ii]==27) ## Binomial (Size, Probability)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  varTemp=qbinom(z[,ii], size=parameters[[ii]][1], prob=parameters[[ii]][2])*1.0
+	  meanX = parameters[[ii]][1]*parameters[[ii]][2] # N*p
+	  sdX   = sqrt(parameters[[ii]][1]*parameters[[ii]][2]*(1 - parameters[[ii]][2])) #sqrt(N*p*(1-p))
+	}
+	if(type[ii]==28) ## Negative Binomial (Mean, Dispersion)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  mu = parameters[[ii]][1]
+	  phi = parameters[[ii]][2]
+	  varTemp=qnbinom(z[,ii], size=phi, mu=mu)*1.0
+	  meanX = mu
+	  sdX   = sqrt(mu*(1+mu/phi))
+	  remove(mu,phi)
+	}
+	if(type[ii]==29) ## Poisson (rate)
+	{
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  lambda = parameters[[ii]][1]
+	  varTemp=qpois(z[,ii], lambda=lambda)*1.0
+	  meanX = lambda
+	  sdX   = sqrt(lambda)
+	  remove(lambda)
+	}
+	
+	
 	varEnv$varTemp=varTemp
 	eval(parse(text=paste(varNames[ii], "=varTemp",sep="")),envir = varEnv)
 

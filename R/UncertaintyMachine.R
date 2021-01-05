@@ -131,7 +131,13 @@ significator = function (y, nsubsamples=1000, stat=mean, k=1, digits=FALSE, ...)
 	zs = apply(z, 2, stat,...)
 	sigma = mad(zs)/sqrt(ny/nz)
 	ys = stat(y, ...)
-	stat.signif = floor(log10(abs(ys/(k*sigma))))
+	
+	if(sigma == 0) { # e.g. discrete distributions with low variance
+	  stat.signif = 1
+	} else {
+	  stat.signif = floor(log10(abs(ys/(k*sigma))))
+	}
+	
 
 	ys.signif = signif(ys, stat.signif)
 	names(ys.signif) = NULL

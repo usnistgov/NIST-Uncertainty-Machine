@@ -1,9 +1,10 @@
-![NIST](https://nccoe.nist.gov/sites/all/themes/custom/nccoe2x/asset/img/NIST_logo.svg)
+![](https://nccoe.nist.gov/sites/all/themes/custom/nccoe2x/asset/img/NIST_logo.svg)
+
 # Máquina de Incerteza do NIST
 
 A Máquina de Incerteza do NIST é um aplicativo de software baseado na
 Web e produzido pelo "National Institute of Standards and Technology"
-([NIST](www.nist.gov)) para avaliar a incerteza de medição associada a uma grandeza de
+([NIST](https://www.nist.gov)) para avaliar a incerteza de medição associada a uma grandeza de
 saída escalar ou vectorial que é uma função conhecida e explícita de um
 conjunto de grandezas de entrada escalares para as quais estimativas e
 avaliações de incerteza de medição estão disponíveis.
@@ -33,7 +34,7 @@ Measure Journal of Measurement Science, volume 10, número 3
 (setembro), páginas 20-27.
 
 O NIST é o instituto nacional de metrologia dos Estados Unidos da
-América. Visite-nos em www.nist.gov. Fundado em 1901, o NIST é uma
+América. Visite-nos em [www.nist.gov](https://www.nist.gov). Fundado em 1901, o NIST é uma
 agência federal não reguladora dentro do Departamento de Comércio dos
 EUA. A missão do NIST é promover a inovação e a competitividade
 industrial dos EUA, promovendo a ciência, os padrões e a tecnologia de
@@ -41,7 +42,8 @@ medição, de forma a aumentar a segurança econômica e melhorar a nossa
 qualidade de vida.
 
 Relatórios de erros e sugestões de melhoria são bem-vindos: envie-os
-para thomas.lafarge@nist.gov e para antonio.possolo@nist.gov.
+para [antonio.possolo@nist.gov](mailto:antonio.possolo@nist.gov).
+
 
 
 
@@ -98,6 +100,8 @@ corresponder à versão do NUM exibida na parte superior da página do
 aplicativo da Web.
 
 ### Descarregar
+  *   [NIST Validation & Verification Script Version 1.5](./FullScriptNUM/FullScriptNUM_1.5.R)
+  *   [NIST Validation & Verification Script Version 1.4.2 & 1.4.3](./FullScriptNUM/FullScriptNUM_1.4.2.R)
   *   [NIST Validation & Verification Script Version 1.4](./FullScriptNUM/FullScriptNUM_1.4.R)
   *   [NIST Validation & Verification Script Version 1.3.6](./FullScriptNUM/FullScriptNUM_1.3.6.R)
   *   [NIST Validation & Verification Script Version 1.3.5](./FullScriptNUM/FullScriptNUM_1.3.5.R)

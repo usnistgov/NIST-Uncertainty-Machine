@@ -186,7 +186,6 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 		if(parameters[1]<=0 || parameters[2]<=0)
 			errorStop(paste("In quantity ",varNames,": The shape and the scale must be positive"), outputFile)
 	}
-
 	if(type==20) ## Constant (value)
 	{
 
@@ -275,7 +274,7 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
                           signif((Right-Left)*sqrt(1/18),3)),outputFile) }
         }
 
-    if(type==22) ## Beta (Shape1, Shape2, Left, Right)
+  if(type==22) ## Beta (Shape1, Shape2, Left, Right)
 	{
             alpha = parameters[1]
             beta = parameters[2]
@@ -338,5 +337,35 @@ checkParam = function(type,parameters,varNames,outputFile,tol=sqrt(.Machine$doub
 				errorStop(paste("In quantity ",varNames,": Probability must be greater than 0 and smaller than 1"), outputFile)
 
 	}
+  
+  if(type==27) ## Binomial (Size, Probability)
+  {
+    if(parameters[1] <= 0 || parameters[1] %% 1 > (0 + tol) )  {
+      errorStop(paste("In quantity ",varNames,": sample size must be a postive integer"), outputFile)
+    }
+    
+    if(parameters[2] <= 0 ||  1 <= parameters[2]) {
+      errorStop(paste("In quantity ",varNames,": probability must be between 0 and 1."), outputFile)
+    }
+  }
+  
+  if(type==28) ## Negative Binomial (Mean, Dispersion)
+  {
+    if(parameters[1] <= 0)  {
+      errorStop(paste("In quantity ",varNames,": mean must be strictly positive."), outputFile)
+    }
+    if(parameters[2] <= 0)  {
+      errorStop(paste("In quantity ",varNames,": dispersion must be strictly positive."), outputFile)
+    }
+    
+  }
+  
+  if(type==29) ## Poisson (Rate)
+  {
+    if(parameters[1] <= 0)  {
+      errorStop(paste("In quantity ",varNames,": rate must be strictly positive."), outputFile)
+    }
+    
+  }
 
 }

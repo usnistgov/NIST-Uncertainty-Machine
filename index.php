@@ -9,7 +9,7 @@
 	<title>NIST Uncertainty Machine</title>
 	<link rel="stylesheet" type="text/css" href="./library/jquery-ui.min.css">
 	<link rel="stylesheet" type="text/css" href="./library/codemirror.css">
-	<link rel="stylesheet" type="text/css" href="./style.css?v1.4.2">
+	<link rel="stylesheet" type="text/css" href="./style.css?v1.5">
 
 	<script src="./library/codemirror.js"></script>
 	<script src="./library/matchbrackets.js"></script>
@@ -37,7 +37,7 @@
 		</div>
 		<div class="nist-header__title">
 			<h4 class="title" >Uncertainty Machine</h4>
-			<h5 class="title" ><select id="mbPOCControlsLangDrop"></select>Version 1.4.2</h5>
+			<h5 class="title" ><select id="mbPOCControlsLangDrop"></select>Version 1.5</h5>
 		</div>
 	</div>
 	<div class="content">
@@ -59,7 +59,7 @@
 							<div class="columnContainer">
 								<div class="columnLeft">
 
-									<p><span data-mlr-text>The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an	output quantity defined by a measurement model of the form</span> <code>y = f(x<sub>0</sub>,...,x<sub>n</sub>)</code>.
+									<p><span data-mlr-text>The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an output quantity defined by a measurement model of the form</span> <code>y = f(x<sub>0</sub>,...,x<sub>n</sub>)</code>.
 									</p>
 									<p>
 									<span data-mlr-text>User's manual available</span> <a  href="./NISTUncertaintyMachine-UserManual.pdf"> <span data-mlr-text>here</span>.</a>
@@ -238,9 +238,9 @@
 
 	<script src="library/jquery.js"></script>
 	<script src="library/jquery-ui.min.js"></script>
-	<script src="language.js?v1.4.2"></script>
-	<script src="results.js?v1.4.2"></script>
-	<script src="script.js?v1.4.2"></script>
+	<script src="language.js?v1.5"></script>
+	<script src="results.js?v1.5"></script>
+	<script src="script.js?v1.5"></script>
 
 
 

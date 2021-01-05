@@ -58,9 +58,13 @@ distribInfo[1] = [
 	,"Lognormal (Mean, StdDev)"
 	,"Sample values (between 30 and 100000)"
 	,"More choices"
-	,"Asymmetric (Median, Left uncertainty, Right uncertainty, Coverage probability)"];
+  ,"Asymmetric (Median, Left uncertainty, Right uncertainty, Coverage probability)"
+  ,"Binomial (Number of trial, Probability)"
+  ,"Negative binomial (Mean, Dispersion)"
+  ,"Poisson (rate)"
+];
 //number of parameters of each distributions
-distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0,4];
+distribInfo[2] = [ 1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0,4,2,2,1];
 
 //type of parameters for each distribution 0=mean 1=stddev 2=left 3=right 4=dof 5=shape 6=scale 7=others
 var distribParamType = [
@@ -91,9 +95,12 @@ var distribParamType = [
 	[8],
 	[8],
 	[0,2,3,8],
+  [7,8],
+  [0,7],
+  [7],
 ];
 
-var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23,26]
+var distribAdvance = [1,2,3,5,6,8,12,18,19,22,23,26,27,28,29]
 var nbDistrib = distribInfo[1].length;
 var outputNb = 1;
 var inputNb = 0;
@@ -273,6 +280,7 @@ function updateNames(){
 
 }
 
+//Sort the distribution of the input (i) aphabetically with sample and more choices at the end
 function sortSelect(i) {
 
  		var elem = document.getElementById( 'distChoice'+(i) );
@@ -310,6 +318,7 @@ function sortSelect(i) {
     return;
 }
 
+//Sort the advanced distribution of the input (i) aphabetically with sample and more choices at the end
 function sortSelectAdvance(i) {
 
 		var elem = document.getElementById( 'distChoice'+(i) );
@@ -326,15 +335,12 @@ function sortSelectAdvance(i) {
     // Grab all existing entries
     for (var i=0;i<elem.options.length;i++) tmpAry.push(elem.options[i]);
     // Sort array by text attribute
-		var tmpAsym = tmpAry[26]; // get asymmetric
-		tmpAry.splice(26,1);
 		var tmpMoreChoice = tmpAry[25]; // get more choice
 		tmpAry.splice(25,1);
 		var tmpSample = tmpAry[24]; // get samples
 		tmpAry.splice(24,1);
 
     tmpAry.sort(function(a,b){ return (a.text < b.text)?-1:1; });
-		tmpAry.push(tmpAsym);
 		tmpAry.push(tmpSample);
 
 
@@ -555,6 +561,20 @@ function setDefault(index,typeDist){
 			$('#paramField'+(index)+'-2').val("3988")
 			$('#paramField'+(index)+'-3').val("0.95")
 		}
+    if(typeDist==27) // Binomial (Number of trial, Probability)
+    {
+      $('#paramField'+(index)+'-0').val("10")
+      $('#paramField'+(index)+'-1').val("0.5")
+    }
+    if(typeDist==28) // Negative binomial (Mean, Dispersion)
+    {
+      $('#paramField'+(index)+'-0').val("1")
+      $('#paramField'+(index)+'-1').val("0.5")
+    }
+    if(typeDist==29) // Poisson (rate)
+    {
+      $('#paramField'+(index)+'-0').val("10")
+    }
 
 
 

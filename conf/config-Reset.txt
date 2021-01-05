@@ -1,4 +1,4 @@
-version=1.4
+version=1.5
 seed=5
 nbVar=1
 nbReal=1000000

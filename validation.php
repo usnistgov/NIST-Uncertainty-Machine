@@ -46,7 +46,7 @@ if (!empty($_POST))
 	$validInputs=TRUE;
 
 	//Hard coded number of parameters for each distribution
-	$distrib = array( 0 =>1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0,4);
+	$distrib = array( 0 =>1,2,2,1,1,2,2,2,4,2,2,3,3,2,2,3,2,2,2,2,1,4,4,2,1,0,4,2,2,1);
 
 
 	$params = array();
@@ -83,6 +83,10 @@ if (!empty($_POST))
 	{
 		echo "<pre><span data-mlr-text>The random number generator seed is not a valid number</span> <br /></pre>";
 		$validInputs=FALSE;
+	}elseif (intval(preg_replace('/\s+/', '',$params["seed"]))>5000000)
+	{
+		echo "<pre><span data-mlr-text>Random number generator too big, it must be smaller than 5 000 000</span> <br /></pre>";
+		$validInputs=FALSE;
 	}
 
 	for ($i = 0; $i < $inputs; $i++)
@@ -114,6 +118,10 @@ if (!empty($_POST))
 	if (!preg_match("/^[+]?[0-9]+((\.[0-9]*)?[eE][+-]?[0-9]+)?$/",preg_replace('/\s+/', '',$params["nReal"])))
 	{
 		echo "<pre><span data-mlr-text>The number of realizations field is not a valid number</span> <br /></pre>";
+		$validInputs=FALSE;
+	}elseif (intval(preg_replace('/\s+/', '',$params["nReal"]))>5000000)
+	{
+		echo "<pre><span data-mlr-text>Number of realizations too big, it must be smaller than 5 000 000</span> <br /></pre>";
 		$validInputs=FALSE;
 	}
 
@@ -159,7 +167,7 @@ if (!empty($_POST))
 		umask($oldmask);
 
 		$array = array(
-			"version=1.4\r\n",
+			"version=1.5\r\n",
 			"seed=".preg_replace('/\s+/', '',$params["seed"])."\r\n",
 			"nbVar={$inputs}\r\n",
 			"nbReal=".preg_replace('/\s+/', '',$params["nReal"])."\r\n",
