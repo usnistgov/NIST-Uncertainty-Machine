@@ -1,0 +1,10 @@
+version=1.5
+seed=51
+nbVar=2
+nbReal=1000000
+variable0=x0;7;0;1
+variable1=x1;7;0;1
+expression=sqrt((x0^2+x1^2)*(x0 > x1))
+outputFile=no-output
+symmetrical=false
+correlation=false

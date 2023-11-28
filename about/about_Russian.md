@@ -32,10 +32,6 @@ Bug reports and suggestions for improvement are most welcome: please send them t
 * Write the definition of the output quantity in a valid R expression.
 * Run the computation.
 
-## Acknowledgements
-
-The authors of the NIST Uncertainty Machine -- Thomas Lafarge, David Newton, Amanda Koepke, and Antonio Possolo -- thank Carlo Carobbi and Francesca Bonacorsi (Università degli Studi di Firenze, Florence, Italy) for detecting an error in the engine of the NIST Uncertainty Machine (NUM), and for kindly alerting us to it. The authors are also particularly indebted to David Duewer (NIST) for offering valuable suggestions for improvement, and are grateful to all the users of the NUM throughout the world for their interest in this application, and for their suggestions and comments.
-
 ## Validation & Verification R Script
 
 `FullScriptNUM.R` is an R script intended to be run locally when the user feels the need to validate, verify, or reproduce results obtained by the "NIST Uncertainty Machine" (NUM).

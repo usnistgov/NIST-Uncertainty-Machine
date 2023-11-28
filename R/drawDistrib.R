@@ -50,10 +50,12 @@ drawDistrib = function(type,parameters,varNames,varEnv,errorFile,ii)
 	}
 	if(type[ii]==2) ## Beta (Shape1, Shape2)
 	{
-		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=rbeta(nbReal, shape1=parameters[[ii]][1], shape2=parameters[[ii]][2])
-		meanX = parameters[[ii]][1]/(parameters[[ii]][1]+parameters[[ii]][2])
-		sdX = sqrt(parameters[[ii]][1]*parameters[[ii]][2]/(((parameters[[ii]][1]+parameters[[ii]][2])^2)*(parameters[[ii]][1]+parameters[[ii]][2]+1)))
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  Shape1 = parameters[[ii]][1]
+	  Shape2 = parameters[[ii]][2]
+	  varTemp=rbeta(nbReal, shape1=Shape1, shape2=Shape2)
+	  meanX = Shape1/(Shape1+Shape2)
+	  sdX = sqrt(Shape1*Shape2/(((Shape1+Shape2)^2)*(Shape1+Shape2+1)))
 	}
 	if(type[ii]==3) ## Chi-Squared (DF)
 	{
@@ -243,12 +245,18 @@ drawDistrib = function(type,parameters,varNames,varEnv,errorFile,ii)
 		sdX   = parameters[[ii]][2];
 	}
 
-	if(type[ii]==22) ## Beta (Shape1, Shape2, Left, Right)
+	if (type[ii]==22) ## Beta (Shape1, Shape2, Left, Right)
 	{
-		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=parameters[[ii]][3] + (parameters[[ii]][4]-parameters[[ii]][3])*rbeta(nbReal, shape1=parameters[[ii]][1], shape2=parameters[[ii]][2])
-		meanX = parameters[[ii]][1]/(parameters[[ii]][1]+parameters[[ii]][2])
-		sdX = sqrt(parameters[[ii]][1]*parameters[[ii]][2]/(((parameters[[ii]][1]+parameters[[ii]][2])^2)*(parameters[[ii]][1]+parameters[[ii]][2]+1)))
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  Shape1 = parameters[[ii]][1]
+	  Shape2 = parameters[[ii]][2]
+	  Left = parameters[[ii]][3]
+	  Right = parameters[[ii]][4]
+	  varTemp = Left + (Right-Left) *
+	    rbeta(nbReal, shape1=Shape1, shape2=Shape2)
+	  meanX = Left + (Right-Left) * Shape1/(Shape1+Shape2)
+	  sdX = (Right-Left) * sqrt(Shape1*Shape2 /
+	                              (((Shape1+Shape2)^2) * (Shape1+Shape2+1)))
 	}
 
 	if(type[ii]==23) ## Lognormal (Mean, StdDev)
@@ -350,10 +358,12 @@ drawDistribCorel = function(type,parameters,varNames,z,varEnv,errorFile,ii)
 
 	if(type[ii]==2) ## Beta (Shape1, Shape2)
 	{
-		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=qbeta(z[,ii], shape1=parameters[[ii]][1], shape2=parameters[[ii]][2])
-		meanX = parameters[[ii]][1]/(parameters[[ii]][1]+parameters[[ii]][2])
-		sdX = sqrt(parameters[[ii]][1]*parameters[[ii]][2]/(((parameters[[ii]][1]+parameters[[ii]][2])^2)*(parameters[[ii]][1]+parameters[[ii]][2]+1)))
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  Shape1 = parameters[[ii]][1]
+	  Shape2 = parameters[[ii]][2]
+	  varTemp=qbeta(z[,ii], shape1=Shape1, shape2=Shape2)
+	  meanX = Shape1/(Shape1+Shape2)
+	  sdX = sqrt(Shape1*Shape2/(((Shape1+Shape2)^2)*(Shape1+Shape2+1)))
 	}
 	if(type[ii]==3) ## Chi-Squared (DF)
 	{
@@ -546,13 +556,18 @@ drawDistribCorel = function(type,parameters,varNames,z,varEnv,errorFile,ii)
 
 
 	}
-	if(type[ii]==22) ## Beta (Shape1, Shape2, Left, Right)
+	if (type[ii]==22) ## Beta (Shape1, Shape2, Left, Right)
 	{
-		checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
-		varTemp=parameters[[ii]][3] + (parameters[[ii]][4]-parameters[[ii]][3])*qbeta(z[,ii], shape1=parameters[[ii]][1], shape2=parameters[[ii]][2])
-		meanX = parameters[[ii]][1]/(parameters[[ii]][1]+parameters[[ii]][2])
-		sdX = sqrt(parameters[[ii]][1]*parameters[[ii]][2]/(((parameters[[ii]][1]+parameters[[ii]][2])^2)*(parameters[[ii]][1]+parameters[[ii]][2]+1)))
-
+	  checkParam(type[ii],parameters[[ii]],varNames[ii],errorFile)
+	  Shape1 = parameters[[ii]][1]
+	  Shape2 = parameters[[ii]][2]
+	  Left = parameters[[ii]][3]
+	  Right = parameters[[ii]][4]
+	  varTemp = Left + (Right-Left) *
+	    qbeta(z[,ii], shape1=Shape1, shape2=Shape2)
+	  meanX = Left + (Right-Left) * Shape1/(Shape1+Shape2)
+	  sdX = (Right-Left) * sqrt(Shape1*Shape2 /
+	                              (((Shape1+Shape2)^2) * (Shape1+Shape2+1)))
 	}
 
 	if(type[ii]==23) ## Lognormal (Mean, StdDev)

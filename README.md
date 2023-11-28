@@ -16,7 +16,7 @@ The NIST Uncertainty Machine evaluates measurement uncertainty by application of
 [PDF available here](https://uncertainty.nist.gov/NISTUncertaintyMachine-UserManual.pdf)
 
 ## Requirements
-* R version 3.6+
+* R version 3.0+
 * Web server supporting PHP 6+
 * jQuery v3+ (version jQuery v3.1.1 included)
 
@@ -38,12 +38,19 @@ In some case (especially when entering samples instead of specifying distributio
  Changing 	```$debug``` to ```TRUE``` in ```validation.php``` can start debug mode which display more information relative to the computation.
 ## Changelog
 
+### version 1.6.0
+- Added alternative parameterization for beta distribution
+- Added acknowledgements for bug notifications and translation assistance
+
+### version 1.5.1
+- Added German, Russian and Ukrainian translation
+
 ### version 1.5
- - Added Poisson, Binomial, and Negative binomial distributions
+ Added Poisson, Binomial, and Negative binomial distributions
 
 ### version 1.4.3 - 2020-11
  - Added Japanese translation
- - Improve About
+ - Improved About
 
 ### version 1.4.2 - 2020-05
  - Fix Student-t degree of freedom between 0 and 2

@@ -1,6 +1,6 @@
 //Restrict languages to only completed ones
 //var listOfLanguages = Object.keys(MLstrings[0]);
-var listOfLanguages = ["English","French","Spanish","Portuguese","Japanese"];
+var listOfLanguages = ["English","French","Spanish","Portuguese","Japanese","Ukrainian","Russian","German"];
 
 
 
@@ -34,8 +34,8 @@ var MLstrings = [
 		English: "The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an output quantity defined by a measurement model of the form",
 		French: "NIST Uncertainty Machine est une application Web permettant d'évaluer l'incertitude de mesure associée à une quantitée définie par un modèle de la forme",
 		German: "The NIST Uncertainty Machine  ist eine webbasierte Softwareanwendung zur Bewertung der Messunsicherheit, die einer durch ein Messmodell des Formulars definierten Ausgangsgröße zugeordnet ist",
-		Ukrainian: "The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an output quantity defined by a measurement model of the form_",// TODO:
-		Russian: "The NIST Uncertainty Machine is a Web-based software application to evaluate the measurement uncertainty associated with an output quantity defined by a measurement model of the form_",//todo
+		Ukrainian: "NIST машина невизначеності - це веб-програмний додаток для оцінки похибки вимірювання, пов'язаної з отриманою величиною, визначеною наступною моделлю вимірювання  ",
+		Russian: "NIST машина неопределенности - это веб-программное приложение для оценки погрешности измерения, связанной с результативной величиной, определенной следующей моделью измерения",
 		Spanish: "La Máquina de Incertidumbre del NIST es una aplicación de software basada en la web para evaluar la incertidumbre de medición asociada con una cantidad de salida definida por un modelo de medición de forma",
 		Portuguese: "A Máquina de Incerteza do NIST é uma aplicação na World Wide Web para calcular a incerteza de medição associada com uma quantidade de saída definida num modelo de medição de forma",
 		Japanese: "NIST不確かさマシンは，次の測定モデルによって定義される出力量の不確かさを評価するウェブベースのソフトウェアツールです:",
@@ -56,8 +56,8 @@ var MLstrings = [
 		English: "1. Select Inputs & Choose Distributions",
 		French: "1. Sélectionner les quantitées d'entrées et choisir leurs distributions",
 		German: "1. Wählen Sie Eingänge und wählen Sie Verteilungen",
-		Ukrainian: "1. Виберіть Входи & Виберіть Розподіл",
-		Russian: "1. Выберите входы и выберите распределения",
+		Ukrainian: "1. Виберіть вхідні значення & Виберіть розподіли",
+		Russian: "1. Выберите входные значения & Выберите распределения",
 		Spanish: "1. Seleccionar entradas y elegir distribuciones",
 		Portuguese: "1. Selecione Entradas e Escolha Distribuições",
 		Japanese: "1. 入力量と分布を選択します",
@@ -68,7 +68,7 @@ var MLstrings = [
 		French: "2. Choisissez les options",
 		German: "2. Wählen Sie Optionen",
 		Ukrainian: "2. Виберіть Опції",
-		Russian: "2. Выберите параметры",
+		Russian: "2. Выберите Функции",
 		Spanish: "2. Elegir opciones",
 		Portuguese: "2. Escolha Opções",
 		Japanese: "2. 計算オプションを選択します",
@@ -77,9 +77,9 @@ var MLstrings = [
 	{
 		English: "3. Write the Definition of Output Quantity",
 		French: "3. Écrire la définition de la quantité de sortie",
-		German: "3. Schreiben Sie die Definition der Ausgabemenge",
-		Ukrainian: "3. Напишіть визначення вихідної кількості",
-		Russian: "3. Напишите определение количества продукции",
+		German: "3. Schreiben Sie die Definition des erhaltenen Wertes",
+		Ukrainian: "3. Напишіть визначення отриманої величини",
+		Russian: "3. Напишите определения полученной величины",
 		Spanish: "3. Escriba la definición de cantidad de salida",
 		Portuguese: "3. Escreva a definição da quantidade de saída",
 		Japanese: "3. 出力量の定義を記述します",
@@ -100,8 +100,8 @@ var MLstrings = [
 		English: "Load examples",
 		French: "Exemples",
 		German: "Lade Beispiele",
-		Ukrainian: "перегляд прикладів/Завантажте приклади",
-		Russian: "Загрузить примеры",
+		Ukrainian: "Перегляд прикладів/ Завантажте приклади",
+		Russian: "Просмотр примеров/ Загрузить примеры",
 		Spanish: "Cargar ejemplos",
 		Portuguese: "Carregue os exemplos",
 		Japanese: "実行例の読み込み",
@@ -166,8 +166,8 @@ var MLstrings = [
 		English: "Write the definition of the output quantity in a valid R expression.",
 		French: "Exprimez la définition du mesurande à l'aide d'une expression R valide.",
 		German: "Schreiben Sie die Definition der Ausgangsgröße in einem gültigen R-Ausdruck.",
-		Ukrainian: "Напишіть вираз для вихідної величини у синтаксисі мови програмування R",
-		Russian: "Напишите выражение для выходного значения в синтаксисе языка программирования R",
+		Ukrainian: "Напишіть вираз для отриманої величини у синтаксисі мови програмування R.",
+		Russian: "Напишите выражение для полученного значения в синтаксисе языка программирования R.",
 		Spanish: "Escriba la definición de la cantidad de salida en una expresión R válida.",
 		Portuguese: "Escreva a definição da quantidade de saída na forma de uma expressão válida em R.",
 		Japanese: "出力量の定義を，R言語の数式の形で記述します。",
@@ -232,8 +232,8 @@ var MLstrings = [
 		English: "Number of realizations of the output quantity:",
 		French: "Nombre de réalisations du mesurande:",
 		German: "Anzahl der Realisierungen der Ausgangsgröße:",
-		Ukrainian: "Кількість реалізацій вихідної змінної:",
-		Russian: "Количество реализаций выходной переменной",
+		Ukrainian: "Кількість реалізацій отриманої величини:",
+		Russian: "Количество реализаций результативной величины",
 		Spanish: "Número de realizaciones de la cantidad de salida:",
 		Portuguese: "Número de realizações da quantidade de saída:",
 		Japanese: "出力量の反復計算の回数:",
@@ -243,8 +243,8 @@ var MLstrings = [
 		English: "Definition of output quantity (R expression):",
 		French: "Définition de la grandeur de sortie (expression R):",
 		German: "Definition der Ausgangsgröße (R-Ausdruck):",
-		Ukrainian: "Визначення вихідної величини (R-вираз):",
-		Russian: "Определение выходного значения (R-выражение):",
+		Ukrainian: "Визначення отриманої величини (R-вираз):",
+		Russian: "Определение результативной величины (R-выражение):",
 		Spanish: "Definición de la cantidad de salida (expresión R):",
 		Portuguese: "Definição da quantidade de saída (expressão R):",
 		Japanese: "出力量の定義 (R言語の数式):",
@@ -487,7 +487,7 @@ var MLstrings = [
 		English: "Uniform (Left Endpoint, Right Endpoint)",
 		French: "Uniform (Extrémité gauche, Extrémité droite)",
 		German: "Stetige Gleichverteilung (linker Endpunkt, rechter Endpunkt)",
-		Ukrainian: "Неперервний рівномірний розподіл(ліва гранична точка, права гранична точка)",
+		Ukrainian: "Неперервний рівномірний розподіл (ліва гранична точка, права гранична точка)",
 		Russian: "Непрерывное равномерное распределение (нижний предел, верхний предел)",
 		Spanish: "Uniforme (Limite Izquierdo, Limite Derecho)",
 		Portuguese: "Uniforme (Limite Esquerdo, Limite Direito)",
@@ -497,8 +497,8 @@ var MLstrings = [
 	{
 		English: "Weibull (Mean, StdDev)",
 		French: "Weibull (Moyenne, StdDev)",
-		German: "Weibull-Verteilung(Erwartungswert, Standardabweichung)",
-		Ukrainian: "Розподіл Вейбула(математичне сподівання, стандартне відхилення)",
+		German: "Weibull-Verteilung (Erwartungswert, Standardabweichung)",
+		Ukrainian: "Розподіл Вейбула (математичне сподівання, стандартне відхилення)",
 		Russian: "Распределение Вейбулла (математическое ожидание, стандартное отклонение)",
 		Spanish: "Weibull (Media, Desviación Estándar)",
 		Portuguese: "Weibull (Média, Desvio Padrão)",
@@ -508,9 +508,9 @@ var MLstrings = [
 	{
 		English: "Weibull (Shape, Scale)",
 		French: "Weibull (Forme, Echelle)",
-		German: "Weibull-Verteilung(Formparameter,Skalenparameter)",
-		Ukrainian: "Розподіл Вейбула(Kоефіцієнт форми, Kоефіцієнт масштабу)",
-		Russian: "Распределение Вейбулла(Kоэффициент формы,Kоэффициент масштаба)",
+		German: "Weibull-Verteilung (Formparameter,Skalenparameter)",
+		Ukrainian: "Розподіл Вейбула (Kоефіцієнт форми, Kоефіцієнт масштабу)",
+		Russian: "Распределение Вейбулла (Kоэффициент формы, Kоэффициент масштаба)",
 		Spanish: "Weibull (Forma, Escala)",
 		Portuguese: "Weibull (Forma, Escala)",
 		Japanese: "ワイブル (形状パラメータ, 尺度パラメータ)",
@@ -609,9 +609,9 @@ var MLstrings = [
 	{
 		English: "Download binary R data file with Monte Carlo values of output quantity",
 		French: "Télécharger le fichier R (Rdata) contenant les valeurs Monte Carlo du mesurande",
-		German: "Zum herunterladen der binären R-Datei mit Monte-Carlo-Werten der Ausgabegröße bitte hier klicken",
-		Ukrainian: "Завантажити бінарний R-файл з Монте-Карло значеннями вихідних даних",
-		Russian: "Загрузить двоичный R-файл с Монте-Карло значениями выходных данных",
+		German: "Herunterladen der binären R-Datei mit Monte-Carlo-Werten des resultierenden Werts",
+		Ukrainian: "Завантажити бінарний R-файл з Монте-Карло значеннями отриманих даних",
+		Russian: "Загрузить двоичный R-файл с Монте-Карло значениями результативных данных",
 		Spanish: "Descargue el archivo de datos binarios R con los valores de Monte Carlo de la cantidad de salida",
 		Portuguese: "Descarregue um ficheiro binário R com os valores de Monte Carlo da quantidade de saída",
 		Japanese: "モンテカルロ出力の値をR言語のバイナリファイルとしてダウンロードします",
@@ -620,9 +620,9 @@ var MLstrings = [
 	{
 		English: "Download a text file with Monte Carlo values of output quantity",
 		French: "Télécharger un fichier texte avec des valeurs Monte Carlo de la quantité de sortie",
-		German: "Zum herunterladen einer Textdatei mit Monte-Carlo-Werten der Ausgabegröße bitte hier klicken",
-		Ukrainian: "Завантажити текстовий файл з Монте-Карло значеннями вихідних даних",
-		Russian: "Загрузить текстовый файл с Монте-Карло значениями выходных данных",
+		German: "Herunterladen einer Textdatei mit Monte-Carlo-Werten der Ausgabegröße",
+		Ukrainian: "Завантажити текстовий файл з Монте-Карло значеннями отриманих даних",
+		Russian: "Загрузить текстовый файл с Монте-Карло значениями результативных данных",
 		Spanish: "Descargar un archivo de texto con valores de Monte Carlo de la cantidad de salida",
 		Portuguese: "Descarregue um ficheiro de texto com os valores de Monte Carlo da quantidade de saída",
 		Japanese: "モンテカルロ出力の値をテキストファイルとしてダウンロードします",
@@ -631,7 +631,7 @@ var MLstrings = [
 	{
 		English: "Download text file with numerical results shown on this page",
 		French: "Télécharger un fichier texte avec les résultats numériques affichés sur cette page",
-		German: "Zum herunterladen der Textdatei mit den auf dieser Seite angezeigten numerischen Ergebnissen bitte hier klicken",
+		German: "Herunterladen der Textdatei mit den auf dieser Seite angezeigten numerischen Ergebnissen",
 		Ukrainian: "Завантажити текстовий файл з числовими результатами, показаними на цій сторінці",
 		Russian: "Загрузить текстовый файл с числовыми результатами, показанными на этой странице",
 		Spanish: "Descargue el archivo de texto con los resultados numéricos que se muestran en esta página",
@@ -642,7 +642,7 @@ var MLstrings = [
 	{
 		English: "Download JPEG file with plot shown on this page",
 		French: "Télécharger le fichier JPEG avec le graph affiché sur cette page",
-		German: "Zum herunterladen einer JPEG-Datei mit dem auf dieser Seite gezeigten graphischen Darstellungen bitte hier klicken",
+		German: "Herunterladen der JPEG-Datei mit dem auf dieser Seite gezeigten graphischen Darstellungen",
 		Ukrainian: "Завантажити JPEG файл з графічним зображенням, показаним на цій сторінці",
 		Russian: "Загрузить JPEG  файл с графическим изображением, показанным на этой странице",
 		Spanish: "Descargar el archivo JPEG con el gráfico que se muestra en esta página",
@@ -653,7 +653,7 @@ var MLstrings = [
 	{
 		English: "Download configuration file",
 		French: "Télécharger le fichier de configuration",
-		German: "Zum herunterladen der Konfigurationsdatei bitte hier klicken",
+		German: "Herunterladen der Konfigurationsdatei",
 		Ukrainian: "Завантажити конфігураційний файл",
 		Russian: "Загрузить конфигурационный файл",
 		Spanish: "Descargar archivo de configuracion",
@@ -665,8 +665,8 @@ var MLstrings = [
 		English: "Shared Outputs",
 		French: "Fichiers communs",
 		German: "Geteilte Ausgaben",
-		Ukrainian: "Спільні вихідні дані",
-		Russian: "Общие выходные данные",
+		Ukrainian: "Спільні отримані дані",
+		Russian: "Общие результативные данные",
 		Spanish: "Salidas compartidas",
 		Portuguese: "Saídas Comuns",
 		Japanese: "共有出力",
@@ -675,9 +675,9 @@ var MLstrings = [
 	{
 		English: "Download binary R data file with Monte Carlo values all output quantities",
 		French: "Fichier R (Rdata) contenant les valeurs Monte Carlo de toutes les mesurandes",
-		German: "Zum herunterladen der binären R-Datei mit Monte-Carlo-Werten aller Ausgangsgrößen bitte hier klicken",
-		Ukrainian: "Завантажити бінарний R-файл з Монте-Карло значеннями всіх вихідних даних",
-		Russian: "Загрузить двоичный R-файл с Монте-Карло значениями всех выходных данных",
+		German: "Herunterladen der binären R-Datei mit Monte-Carlo-Werten aller Ausgangsgrößen",
+		Ukrainian: "Завантажити бінарний R-файл з Монте-Карло значеннями всіх отриманих даних",
+		Russian: "Загрузить двоичный R-файл с Монте-Карло значениями всех результативных данных",
 		Spanish: "Descargue el archivo de datos binarios R con los valores de Monte Carlo en todas las cantidades de salida",
 		Portuguese: "Descarregue um ficheiro binário R com os valores de Monte Carlo de todas as quantidade de saída",
 		Japanese: "すべての出力量に対するモンテカルロ出力の値をR言語のバイナリファイルとしてダウンロードします",
@@ -697,9 +697,9 @@ var MLstrings = [
 	{
 		English: "Download a text file with Monte Carlo values of all output quantities",
 		French: "Fichier texte contenant les valeurs Monte Carlo de toutes les mesurandes",
-		German: "Zum herunterladen einer Textdatei mit Monte-Carlo-Werten aller Ausgangsgrößen bitte hier klicken",
-		Ukrainian: "Завантажити текстовий файл з Монте-Карло значеннями всіх вихідних даних",
-		Russian: "Загрузить текстовый файл с Монте-Карло значениями всех выходных данных",
+		German: "Herunterladen einer Textdatei mit Monte-Carlo-Werten aller Ausgangsgrößen",
+		Ukrainian: "Завантажити текстовий файл з Монте-Карло значеннями всіх отриманих даних",
+		Russian: "Загрузить текстовый файл с Монте-Карло значениями всех результативных данных",
 		Spanish: "Descargue un archivo de texto con valores de Monte Carlo de todas las cantidades de salida",
 		Portuguese: "Descarregue um ficheiro de texto com os valores de Monte Carlo de todas as quantidade de saída",
 		Japanese: "すべての出力量に対するモンテカルロ出力の値をテキストファイルとしてダウンロードします",
@@ -708,10 +708,10 @@ var MLstrings = [
 	{
 		English: "Download JPEG file of this plot",
 		French: "Télécharger le fichier JPEG de ce graphe",
-		German: "Download JPEG file of this plot",//todogerman
-		Ukrainian: "Download JPEG file of this plot",//
-		Russian: "Download JPEG file of this plot",//
-		Spanish: "Descarga el archivo JPEG con esto gráfico.",//
+		German: "Laden Sie die JPEG-Datei dieses Plots herunter",
+		Ukrainian: "Завантажити файл у форматі JPEG цього графіка",
+		Russian: "Скачать файл в формате JPEG этого графика",
+		Spanish: "Descarga el archivo JPEG con esto gráfico.",
 		Portuguese: "Descarregue um ficheiro JPEG com este gráfico",
 		Japanese: "このプロットのJPEGファイルをダウンロードします",
 
@@ -721,9 +721,9 @@ var MLstrings = [
 	{
 		English: "The random number generator seed is not a valid number",
 		French: "La graine du générateur de nombres aléatoires n'est pas un nombre valide",
-		German: "Der Zufallszahlengenerator-Startwert ist keine gültige Zahl",
-		Ukrainian: "The random number generator seed is not a valid number",
-		Russian: "The random number generator seed is not a valid number",
+		German: "Der Zufallszahlgenerator-Startwert ist keine gültige Zahl",
+		Ukrainian: "Початкове число генератора випадкових чисел не є допустимим числом",
+		Russian: "Начальное число генератора случайных чисел не является допустимым числом",
 		Spanish: "La semilla del generador de números aleatorios no es un número válido",
 		Portuguese: "O valor da semente do gerador de números aleatórios não é um número válido",
 		Japanese: "乱数発生のシードが有効な値ではありません",
@@ -732,9 +732,9 @@ var MLstrings = [
 	{
 		English: "The quantity name",
 		French: "Le nom de la grandeur",
-		German: "Der Name",
-		Ukrainian: "The quantity name",
-		Russian: "The quantity name",
+		German: "Name der Variablen",
+		Ukrainian: "Назва величини",
+		Russian: "Название величины",
 		Spanish: "El nombre de la cantidad",
 		Portuguese: "O nome da quantidade",
 		Japanese: "量の名前",
@@ -744,8 +744,8 @@ var MLstrings = [
 		English: "is not a valid name",
 		French: "n'est pas un nom valide",
 		German: "ist kein gültiger Name",
-		Ukrainian: "is not a valid name",
-		Russian: "is not a valid name",
+		Ukrainian: "хибна назва",
+		Russian: "ошибка в названии",
 		Spanish: "no es un nombre válido",
 		Portuguese: "não é um nome válido",
 		Japanese: "は有効な名前ではありません",
@@ -755,8 +755,8 @@ var MLstrings = [
 		English: "The parameter",
 		French: "Le paramètre",
 		German: "Der Parameter",
-		Ukrainian: "The parameter",
-		Russian: "The parameter",
+		Ukrainian: "Параметр",
+		Russian: "Параметр",
 		Spanish: "El parámetro",
 		Portuguese: "O parâmetro",
 		Japanese: "パラメータ",
@@ -765,9 +765,9 @@ var MLstrings = [
 	{
 		English: "of the quantity",
 		French: "de la grandeur",
-		German: "der Menge",
-		Ukrainian: "of the quantity",
-		Russian: "of the quantity",
+		German: "der Variablen",
+		Ukrainian: "величини",
+		Russian: "величины",
 		Spanish: "de la cantidad",
 		Portuguese: "da quantidade",
 		Japanese: "　(量",
@@ -776,9 +776,9 @@ var MLstrings = [
 	{
 		English: "is not a valid number",
 		French: "n'est pas un nombre valide",
-		German: "ist keine gültige Nummer",
-		Ukrainian: "is not a valid number",
-		Russian: "is not a valid number",
+		German: "ist keine gültige Zahl",
+		Ukrainian: "неправильно вибране число",
+		Russian: "неправильно выбраное число",
 		Spanish: "no es un número válido",
 		Portuguese: "não é um número válido",
 		Japanese: "に対する) は有効な値ではありません",
@@ -788,8 +788,8 @@ var MLstrings = [
 		English: "The number of realizations field is not a valid number",
 		French: "Le nombre de réalisations n'est pas un nombre valide",
 		German: "Das Feld für die Anzahl der Realisierungen ist keine gültige Zahl",
-		Ukrainian: "The number of realizations field is not a valid number",
-		Russian: "The number of realizations field is not a valid number",
+		Ukrainian: "Помилка в виборі кількості реалізацій",
+		Russian: "Ошибка в выборе количества реализаций",
 		Spanish: "El número de realizaciones no es válido",
 		Portuguese: "O número de realizações não válido",
 		Japanese: "反復計算の回数が有効な値ではありません",
@@ -798,9 +798,9 @@ var MLstrings = [
 	{
 		English: "Number of realizations too big, it must be smaller than 5 000 000",
 		French: "Le nombre de réalisations est trop grand, il doit être inférieur à 5 000 000",
-		German: "Number of realizations too big, it must be smaller than 5 000 000",//todogerman
-		Ukrainian: "Number of realizations too big, it must be smaller than 5 000 000",
-		Russian: "Number of realizations too big, it must be smaller than 5 000 000",
+		German: "Die Anzahl der Realisierungen ist zu groß, sie sollte kleiner als 5 000 000 sein",
+		Ukrainian: "Завелике число реалізацій, має бути менше ніж 5 000 000",
+		Russian: "Количество реализаций слишком велико, должно быть меньше 5 000 000",
 		Spanish: "El número de realizaciones no es válido, debe ser menor que 5 000 000",
 		Portuguese: "O número de realizações não válido, tem de ser menor do que 5 000 000",
 		Japanese: "反復計算の回数が有効な値ではありません.",
@@ -809,9 +809,9 @@ var MLstrings = [
 	{
 		English: "Random number generator too big, it must be smaller than 5 000 000",
 		French: "La graine du générateur de nombres aléatoires est trop grande, elle doit être inférieur à 5 000 000",
-		German: "Random number generator too big, it must be smaller than 5 000 000",//todogerman
-		Ukrainian: "Random number generator too big, it must be smaller than 5 000 000",
-		Russian: "Random number generator too big, it must be smaller than 5 000 000",
+		German: "Der Zufallszahlgenerator ist zu groß, er sollte kleiner als 5 000 000 sein",
+		Ukrainian: "Генератор випадкових чисел повинен бути менший ніж 5 000 000",
+		Russian: "Генератор случайных чисел должен быть меньше 5000000",
 		Spanish: "La semilla del generador de números aleatorios no es válido, debe ser menor que 5 000 000",
 		Portuguese: "O valor da semente do gerador de números aleatórios não é um número válido, tem de ser menor do que 5 000 000",
 		Japanese: "乱数ジェネレータシードは有効な値ではありません",
@@ -820,9 +820,9 @@ var MLstrings = [
 	{
 		English: "The number of degrees of freedom of the copula is not a valid number",
 		French: "Le nombre de degrés de liberté de la copula n'est pas un nombre valide",
-		German: "Die Anzahl der Freiheitsgrade der Kopula ist keine gültige Zahl",
-		Ukrainian: "The number of degrees of freedom of the copula is not a valid number",
-		Russian: "The number of degrees of freedom of the copula is not a valid number",
+		German: "Die Anzahl der Freiheitsgrade der Copula ist keine gültige Zahl",
+		Ukrainian: "Число ступенів свободи Копулa не є допустимим числом",
+		Russian: "Число степеней свободы Копула не является допустимым числом",
 		Spanish: "El número de grados de libertad de la cópula no es un número válido",
 		Portuguese: "O número dos graus de liberdade da cópula não é válido",
 		Japanese: "コピュラの自由度が有効な値ではありません",
@@ -832,8 +832,8 @@ var MLstrings = [
 		English: "The correlation value",
 		French: "La valeur de corrélation",
 		German: "Der Korrelationswert",
-		Ukrainian: "The correlation value",
-		Russian: "The correlation value",
+		Ukrainian: "Значення кореляції",
+		Russian: "Значение корреляции",
 		Spanish: "El valor de la correlacion",
 		Portuguese: "O valor da correlação",
 		Japanese: "相関値",
@@ -842,9 +842,9 @@ var MLstrings = [
 	{
 		English: "The output quantity",
 		French: "La grandeur de sortie",
-		German: "Die Ausgabemenge",
-		Ukrainian: "The output quantity",
-		Russian: "The output quantity",
+		German: "Der resultierende Wert",
+		Ukrainian: "Отримане значення",
+		Russian: "Результативное значение",
 		Spanish: "La cantidad de salida",
 		Portuguese: "A quantidade de saída",
 		Japanese: "出力量",
@@ -854,8 +854,8 @@ var MLstrings = [
 		English: "is empty or not valid",
 		French: "est vide ou non valide",
 		German: "ist leer oder ungültig",
-		Ukrainian: "is empty or not valid",
-		Russian: "is empty or not valid",
+		Ukrainian: "порожнє або хибне",
+		Russian: "пустое или ошибочное",
 		Spanish: "está vacío o no es válido",
 		Portuguese: "não tem valor ou o valor não é válido",
 		Japanese: "が空，もしくは有効ではありません",
@@ -880,9 +880,9 @@ var MLstringsResults = [
 	{
 		English: "Monte Carlo Method",
 		French: "Méthode de Monte Carlo ",
-		German: "Monte Carlo Method",//todogerman
-		Ukrainian: "Monte Carlo Method",
-		Russian: "Monte Carlo Method",
+		German: "Monte-Carlo Methode",
+		Ukrainian: "Метод Монте-Карло",
+		Russian: "Метод Монте-Карло",
 		Spanish: "Método de Monte Carlo",
 		Portuguese: "Método de Monte Carlo",
 		Japanese: "モンテカルロ法",
@@ -891,9 +891,9 @@ var MLstringsResults = [
 	{
 		English: "Summary statistics for sample of size",
 		French: "Résultats pour un échantillon de taille ",
-		German: "Summary statistics for sample of size",//todogerman
-		Ukrainian: "Summary statistics for sample of size",
-		Russian: "Summary statistics for sample of size",
+		German: "Zusammenfassende Statistik für die Stichprobe mit der Größe",
+		Ukrainian: "Зведена статистика для вибірки розміру",
+		Russian: "Сводная статистика для выборки размером",
 		Spanish: "Estadísticas de resumen para muestra de tamaño",
 		Portuguese: "Estatísticas de sumário para amostra de tamanho",
 		Japanese: "要約統計量；ただしサンプルサイズ",
@@ -902,9 +902,9 @@ var MLstringsResults = [
 	{
 		English: "ave",
 		French: "moyenne ",
-		German: "erwartungswert",
-		Ukrainian: "математичне",
-		Russian: "ожидание",
+		German: "Erwartungswert",
+		Ukrainian: "математичне сподівання",
+		Russian: "математическое ожидание",
 		Spanish: "Media",
 		Portuguese: "Média",
 		Japanese: "平均",
@@ -913,9 +913,9 @@ var MLstringsResults = [
 	{
 		English: "sd",
 		French: "sd",
-		German: "sd",//todogerman
-		Ukrainian: "відхилення",
-		Russian: "отклонение",
+		German: "Standartabweichung",
+		Ukrainian: "Стандартне відхилення",
+		Russian: "Стандартное отклонение",
 		Spanish: "Desviación Estándar",
 		Portuguese: "Desvio Padrão",
 		Japanese: "標準偏差",
@@ -924,9 +924,9 @@ var MLstringsResults = [
 	{
 		English: "median",
 		French: "mediane",
-		German: "erwartungswert",
-		Ukrainian: "математичне",
-		Russian: "ожидание",
+		German: "Median",
+		Ukrainian: "медіана",
+		Russian: "медиана",
 		Spanish: "mediana",
 		Portuguese: "mediana",
 		Japanese: "中央値",
@@ -935,9 +935,9 @@ var MLstringsResults = [
 	{
 		English: "Coverage intervals",
 		French: "Intervalles de couverture",
-		German: "Coverage intervals",//todogerman
-		Ukrainian: "Coverage intervals",
-		Russian: "Coverage intervals",
+		German: "Überdeckungsintervalle",
+		Ukrainian: "Інтервали покриття",
+		Russian: "Интервалы охвата",
 		Spanish: "Intervalos de cobertura",
 		Portuguese: "Intervalos de cobertura",
 		Japanese: "包含区間",
@@ -946,9 +946,9 @@ var MLstringsResults = [
 	{
 		English: "w/out Residual w/ Residual",
 		French: "Avec Résiduelle Sans Résiduelle",
-		German: "w/out Residual w/ Residual",//todogerman
-		Ukrainian: "w/out Residual w/ Residual",
-		Russian: "w/out Residual w/ Residual",
+		German: "mit Ausgabe Residuen   ohne Residuen",
+		Ukrainian: "з залишками   без залишків",
+		Russian: "с остатками   без остатков",
 		Spanish: "Sin Residual    Con Residual",
 		Portuguese: "Sem Resíduo    Com Resíduo",
 		Japanese: "残差含まず  残差含む",
@@ -957,9 +957,9 @@ var MLstringsResults = [
 	{
 		English: "Gauss's Formula (GUM's Linear Approximation)",
 		French: "Formule de Gauss (Approximation lineaire du GUM)",
-		German: "erwartungswert",
-		Ukrainian: "математичне",
-		Russian: "ожидание",
+		German: "Gaußsche Formel (GUM lineare Approximation)",
+		Ukrainian: "Формула Гаусса (лінійна апроксимація GUM)",
+		Russian: "Формула Гаусса (линейное приближение GUM)",
 		Spanish: "Fórmula de Gauss (Aproximación Linear del GUM)",
 		Portuguese: "Fórmula de Gauss (Aproximação Linear do GUM)",
 		Japanese: "ガウスの公式 (GUMにおける線形近似)",
@@ -967,10 +967,10 @@ var MLstringsResults = [
 	},
 	{
 		English: "SensitivityCoeffs Percent.u2",
-		French: "Sensibilité Coeff Pourcent.u2",
-		German: "SensitivityCoeffs Percent.u2",//todogerman
-		Ukrainian: "SensitivityCoeffs Percent.u2",
-		Russian: "SensitivityCoeffs Percent.u2",
+		French: "SensibilitéCoeff Pourcent.u2",
+		German: "SensibilitätsKoeffizient Prozent.u2",
+		Ukrainian: "КоефіцієнтЧутливості Відсоток.u2",
+		Russian: "КоэффициентЧувствительности Процент.u2",
 		Spanish: "CoeficientesDeSensibilidad Percentage.u2",
 		Portuguese: "CoeficientesDeSensitividade Percentagem.u2",
 		Japanese: "感度係数 　寄与率 (%)",
@@ -981,9 +981,9 @@ var MLstringsResults = [
 	{
 		English: "In quantity",
 		French: "Dans la grandeur",
-		German: "In quantity",//todogerman
-		Ukrainian: "In quantity",
-		Russian: "In quantity",
+		German: "In der Variablen",
+		Ukrainian: "У змінній",
+		Russian: "В переменной",
 		Spanish: "En la cantidad",
 		Portuguese: "Na quantidade",
 		Japanese: "量",
@@ -992,9 +992,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be positive",
 		French: "StdDev doit être positif",
-		German: "StdDev must be positive",//todogerman
-		Ukrainian: "StdDev must be positive",
-		Russian: "StdDev must be positive",
+		German: "Die Standardabwichung sollte positiv sein",
+		Ukrainian: "стандартне відхилення повинно бути позитивним",
+		Russian: "стандартное отклонение должно быть положительным",
 		Spanish: "Desviación Estándar debe ser positiva",
 		Portuguese: "Desvio Padrão tem de ser positivo",
 		Japanese: "標準偏差は正値でなければなりません",
@@ -1003,9 +1003,9 @@ var MLstringsResults = [
 	{
 		English: "Probability must be greater than 0 and smaller than 1",
 		French: "Probabilité doit être supérieure à 0 et inférieure à 1",
-		German: "Probability must be greater than 0 and smaller than 1",//todogerman
-		Ukrainian: "Probability must be greater than 0 and smaller than 1",
-		Russian: "Probability must be greater than 0 and smaller than 1",
+		German: "Die Wahrscheinlichkeit sollte größer als 0 und kleiner als 1 sein",
+		Ukrainian: "Імовірність повинна бути більшою від 0 і меншою від 1",
+		Russian: "Вероятность должна быть больше 0 и меньше 1",
 		Spanish: "Probabilidad debe ser mayor que 0 y menor que 1",
 		Portuguese: "Probabilidade tem de ser maior do que 0 e menor do que 1",
 		Japanese: "確率の値は0以上，1以下でなければなりません",
@@ -1014,9 +1014,9 @@ var MLstringsResults = [
 	{
 		English: "Mean must be greater than 0 and smaller than 1",
 		French: "La moyenne doit être supérieure à 0 et inférieure à 1",
-		German: "Mean must be greater than 0 and smaller than 1",//todogerman
-		Ukrainian: "Mean must be greater than 0 and smaller than 1",
-		Russian: "Mean must be greater than 0 and smaller than 1",
+		German: "Der Mittelwert sollte größer als 0 und kleiner als 1 sein",
+		Ukrainian: "Середнє значення має бути більшим від 0 і меншим від 1",
+		Russian: "Среднее значение должно быть больше 0 и меньше 1",
 		Spanish: "Media debe ser mayor que 0 y menor que 1",
 		Portuguese: "Média tem de ser maior do que 0 e menor do que 1",
 		Japanese: "平均は0以上，1以下でなければなりません",
@@ -1025,9 +1025,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be greater than 0 and smaller than 1/2",
 		French: "StdDev doit être supérieur à 0 et inférieur à 1/2",
-		German: "StdDev must be greater than 0 and smaller than 1/2",//todogerman
-		Ukrainian: "StdDev must be greater than 0 and smaller than 1/2",
-		Russian: "StdDev must be greater than 0 and smaller than 1/2",
+		German: "Die Standardabweichung sollte größer als 0 und kleiner als 1/2 sein",
+		Ukrainian: "Стандартне відхилення повинно бути більшим від 0 і меншим від 1/2",
+		Russian: "Стандартное отклонение должно быть больше 0 и меньше 1/2",
 		Spanish: "Desviación Estándar debe ser mayor que 0 y menor que 1/2",
 		Portuguese: "Desvio Padrão tem de ser maior do que 0 e menor do que 1/2",
 		Japanese: "標準偏差は0以上，1/2以下でなければなりません",
@@ -1036,9 +1036,9 @@ var MLstringsResults = [
 	{
 		English: "Illegal combination of Mean and StdDev",
 		French: "Combinaison illégale de la moyenne et StdDev",
-		German: "Illegal combination of Mean and StdDev",//todogerman
-		Ukrainian: "Illegal combination of Mean and StdDev",
-		Russian: "Illegal combination of Mean and StdDev",
+		German: "Illegale Kombination von Mittelwert und Standardabwichung",
+		Ukrainian: "Недопустиме поєднання середнього та стандартного відхилення",
+		Russian: "Недопустимое сочетание среднего и стандартного отклонения",
 		Spanish: "Combinación ilegal de Media y Desviación Estándar",
 		Portuguese: "Combinação ilegal dos valores da Média e do Desvio Padrão",
 		Japanese: "平均と標準偏差の値の組合せが不正です",
@@ -1047,9 +1047,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be between",
 		French: "StdDev doit être compris entre",
-		German: "StdDev must be between",//todogerman
-		Ukrainian: "StdDev must be between",
-		Russian: "StdDev must be between",
+		German: "Die Standardabweichung liegt zwischen ",
+		Ukrainian: "Стандартне відхилення має бути між",
+		Russian: "Стандартное отклонение должно быть между",
 		Spanish: "Desviación Estándar debe estar entre",
 		Portuguese: "Desvio Padrão tem de estar entre",
 		Japanese: "標準偏差は次の値の間になければなりません",
@@ -1058,9 +1058,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be less than",
 		French: "StdDev doit être inférieur à",
-		German: "StdDev must be less than",//todogerman
-		Ukrainian: "StdDev must be less than",
-		Russian: "StdDev must be less than",
+		German: "Die Standardabweichung sollte kleiner sein als",
+		Ukrainian: "Стандартне відхилення має бути меншим від",
+		Russian: "Стандартное отклонение должно быть меньше чем",
 		Spanish: "Desviación Estándar debe ser menor que",
 		Portuguese: "Desvio Padrão tem de ser menor do que",
 		Japanese: "標準偏差は次の値より小さくなくてはなりません",
@@ -1069,9 +1069,9 @@ var MLstringsResults = [
 	{
 		English: "Both shape parameters must be positive",
 		French: "Les deux paramètres de forme doivent être positifs",
-		German: "Both shape parameters must be positive",//todogerman
-		Ukrainian: "Both shape parameters must be positive",
-		Russian: "Both shape parameters must be positive",
+		German: "Beide Formparameter sollten positiv sein",
+		Ukrainian: "Обидва параметри форми повинні бути позитивними",
+		Russian: "Оба параметра формы должны быть положительными",
 		Spanish: "Los dos parámetros de forma deben ser positivos",
 		Portuguese: "Ambos os parâmetros de forma têm de ser positivos",
 		Japanese: "いずれの形状パラメータも正値でなければなりません",
@@ -1080,9 +1080,9 @@ var MLstringsResults = [
 	{
 		English: "No. of degrees of freedom must be positive",
 		French: "Le nombre de degrés de liberté doit être positif",
-		German: "No. of degrees of freedom must be positive",//todogerman
-		Ukrainian: "No. of degrees of freedom must be positive",
-		Russian: "No. of degrees of freedom must be positive",
+		German: "Die Anzahl der Freiheitsgrade sollte positiv sein",
+		Ukrainian: "Кількість ступенів вільності має бути додатньою",
+		Russian: "Число степеней свободы должно быть положительным",
 		Spanish: "Los grados de libertad deben ser positivos",
 		Portuguese: "O número de graus de liberdade tem de ser positivo",
 		Japanese: "自由度は正値でなければなりません",
@@ -1091,9 +1091,9 @@ var MLstringsResults = [
 	{
 		English: "The mean must be positive",
 		French: "La moyenne doit être positif",
-		German: "The mean must be positive",//todogerman
-		Ukrainian: "The mean must be positive",
-		Russian: "The mean must be positive",
+		German: "Der Mittelwert sollte positiv sein",
+		Ukrainian: "Середнє значення має бути позитивним",
+		Russian: "Среднее значение должно быть положительным",
 		Spanish: "La media debe ser positiva",
 		Portuguese: "A média tem de ser positiva",
 		Japanese: "平均は正値でなければなりません",
@@ -1102,9 +1102,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be positive",
 		French: "StdDev doit être positif",
-		German: "StdDev must be positive",//todogerman
-		Ukrainian: "StdDev must be positive",
-		Russian: "StdDev must be positive",
+		German: "Die Standardabweichung sollte positiv sein",
+		Ukrainian: "Стандартне відхилення має бути позитивним",
+		Russian: "Стандартное отклонение должно быть положительным",
 		Spanish: "Desviación Estándar debe ser positiva",
 		Portuguese: "Desvio Padrão tem de ser positivo",
 		Japanese: "標準偏差は正値でなければなりません",
@@ -1113,9 +1113,9 @@ var MLstringsResults = [
 	{
 		English: "The shape and the scale must be positive",
 		French: "La forme et l'échelle doivent être positifs",
-		German: "The shape and the scale must be positive",//todogerman
-		Ukrainian: "The shape and the scale must be positive",
-		Russian: "The shape and the scale must be positive",
+		German: "Die Form und die Skalierung sollten positiv sein",
+		Ukrainian: "Параметри форми та масштабу повинні бути позитивними",
+		Russian: "Параметры формы и масштаба должны быть положительными",
 		Spanish: "La forma y la escala deben ser positivas",
 		Portuguese: "A forma e a escala têm de ser positivas",
 		Japanese: "形状パラメータと尺度パラメータは正値でなければなりません",
@@ -1124,9 +1124,9 @@ var MLstringsResults = [
 	{
 		English: "Left must be less than Right",
 		French: "L'extrémité gauche doit être inférieur à l'extrémité droite",
-		German: "Left must be less than Right",//todogerman
-		Ukrainian: "Left must be less than Right",
-		Russian: "Left must be less than Right",
+		German: "Der Wert links sollte kleiner als rechts sein",
+		Ukrainian: "Значення ліворуч має бути меншим ніж праворуч",
+		Russian: "Значение слева должно быть меньше чем справа",
 		Spanish: "Izquerdo debe ser menor que el Derecho",
 		Portuguese: "O limite esquerdo tem de ser menor do que o limite direito",
 		Japanese: "左端点は右端点より小さくなくてはなりません",
@@ -1135,9 +1135,9 @@ var MLstringsResults = [
 	{
 		English: "No. of degrees of freedom must be greater than 2",
 		French: "Le nombre de degrés de liberté doit être supérieur à 2",
-		German: "No. of degrees of freedom must be greater than 2",//todogerman
-		Ukrainian: "No. of degrees of freedom must be greater than 2",
-		Russian: "No. of degrees of freedom must be greater than 2",
+		German: "Die Anzahl der Freiheitsgrade sollte größer als 2 sein",
+		Ukrainian: "Число ступенів вільності має бути більшим ніж 2",
+		Russian: "Число степеней свободы должно быть больше 2.",
 		Spanish: "El número de grados de libertad debe ser mayor que 2",
 		Portuguese: "O número de graus de liberdade tem de ser maior do que 2",
 		Japanese: "自由度は2より大きくなくてはなりません",
@@ -1146,9 +1146,9 @@ var MLstringsResults = [
 	{
 		English: "Scale must be positive",
 		French: "L'échelle doit être positif",
-		German: "Scale must be positive",//todogerman
-		Ukrainian: "Scale must be positive",
-		Russian: "Scale must be positive",
+		German: "Der Skalierungsparameter sollte positiv sein",
+		Ukrainian: "Параметр масштабу повинен бути позитивним",
+		Russian: "Параметр масштаба должен быть положительным",
 		Spanish: "Escala debe ser positiva",
 		Portuguese: "A escala tem se ser positiva",
 		Japanese: "尺度パラメータは正値でなければなりません",
@@ -1157,9 +1157,9 @@ var MLstringsResults = [
 	{
 		English: "Left must be less than or equal to Mode",
 		French: "L'extrémité gauche doit être inférieur au Mode",
-		German: "Left must be less than or equal to Mode",//todogerman
-		Ukrainian: "Left must be less than or equal to Mode",
-		Russian: "Left must be less than or equal to Mode",
+		German: "Der Wert links sollte kleiner oder gleich dem Modus sein",
+		Ukrainian: "Значення ліворуч має бути меншим або дорівнювати значенню мода",
+		Russian: "Значение слева должно быть меньше или равно значению мода",
 		Spanish: "Izquierdo debe ser menor o igual al valor modal",
 		Portuguese: "O limite esquerdo tem de ser menor ou igual ao valor modal",
 		Japanese: "左端点は最頻値以下でなくてはなりません",
@@ -1168,9 +1168,9 @@ var MLstringsResults = [
 	{
 		English: "Mode must be less than or equal to Right",
 		French: "Mode doit être inférieur à l'extrémité droite",
-		German: "Mode must be less than or equal to Right",//todogerman
-		Ukrainian: "Mode must be less than or equal to Right",
-		Russian: "Mode must be less than or equal to Right",
+		German: "Der Modus sollte kleiner oder gleich dem Wert rechts sein",
+		Ukrainian: "Значення мода має бути меншим або дорівнювати значенню праворуч",
+		Russian: "Значение мода должно быть меньше или равно значению справа",
 		Spanish: "El valor modal debe ser menor o igual al Derecho",
 		Portuguese: "O valor modal tem de ser menor do que o limite direito",
 		Japanese: "最頻値は右端点以下でなくてはなりません",
@@ -1179,9 +1179,9 @@ var MLstringsResults = [
 	{
 		English: "Left and Right must be different",
 		French: "L'extrémité gauche et l'extrémité droite doivent être différents",
-		German: "Left and Right must be different",//todogerman
-		Ukrainian: "Left and Right must be different",
-		Russian: "Left and Right must be different",
+		German: "Der Wert links muss sich vom Wert rechts unterscheiden",
+		Ukrainian: "Значення ліворуч повинно бути відмінним від значення праворуч",
+		Russian: "Значение слева должно быть отличным от значения справа",
 		Spanish: "Izquierdo y Derecho deben ser diferentes",
 		Portuguese: "Os valores terminais esquerdo e direito têm de ser diferentes",
 		Japanese: "左端点と右端点は違う値でなければなりません",
@@ -1190,9 +1190,9 @@ var MLstringsResults = [
 	{
 		English: "Mean must be greater than Left and smaller than Right",
 		French: "La moyenne doit être supérieure à gauche et inférieure à droite",
-		German: "Mean must be greater than Left and smaller than Right",//todogerman
-		Ukrainian: "Mean must be greater than Left and smaller than Right",
-		Russian: "Mean must be greater than Left and smaller than Right",
+		German: "Der Mittelwert sollte größer als der Wert links und kleiner als der Wert rechts sein",
+		Ukrainian: "Середнє значення має бути більшим від значення ліворуч і меншим від значення праворуч",
+		Russian: "Среднее значение должно быть больше значения слева и меньше значения справа",
 		Spanish: "La media debe ser mayor que el Izquierdo y menor que el Derecho",
 		Portuguese: "Média tem de ser maior do que o limite esquerdo e menor do que o limite direito",
 		Japanese: "平均は左端点より大きく，右端点より小さくなくてはなりません",
@@ -1201,9 +1201,9 @@ var MLstringsResults = [
 	{
 		English: "StdDev must be greater than 0 and smaller than",
 		French: "StdDev doit être supérieur à 0 et inférieur à",
-		German: "StdDev must be greater than 0 and smaller than",//todogerman
-		Ukrainian: "StdDev must be greater than 0 and smaller than",
-		Russian: "StdDev must be greater than 0 and smaller than",
+		German: "Die Standardabweichung sollte größer als 0 sein und kleiner als",
+		Ukrainian: "Стандартне відхилення має бути більшим від 0 і меншим від",
+		Russian: "Стандартное отклонение должно быть больше 0 и меньше",
 		Spanish: "Desviación Estándar debe ser mayor que 0 y menor que",
 		Portuguese: "Desvio Padrão tem de ser maior do que 0 e menor do que",
 		Japanese: "標準偏差は0より大きく次の値より小さくなくてはなりません",
@@ -1212,9 +1212,9 @@ var MLstringsResults = [
 	{
 		English: "Both shape parameters must be positive",
 		French: "Les deux paramètres de forme doivent être positifs",
-		German: "Both shape parameters must be positive",//todogerman
-		Ukrainian: "Both shape parameters must be positive",
-		Russian: "Both shape parameters must be positive",
+		German: "Beide Formparameter sollten positiv sein",
+		Ukrainian: "Обидва параметри форми повинні бути позитивними",
+		Russian: "Оба параметра формы должны быть положительными",
 		Spanish: "Los dos parámetros de forma deben ser positivos",
 		Portuguese: "Ambos os parâmetros de forma them de ser positivos",
 		Japanese: "形状パラメータはいずれも正値でなければなりません",
@@ -1223,9 +1223,9 @@ var MLstringsResults = [
 	{
 		English: "Left must be strictly smaller than Right",
 		French: "Left doit être strictement plus petit que Right",
-		German: "Left must be strictly smaller than Right",//todogerman
-		Ukrainian: "Left must be strictly smaller than Right",
-		Russian: "Left must be strictly smaller than Right",
+		German: "Der Wert links sollte streng kleiner als rechts sein",
+		Ukrainian: "Значення ліворуч має бути строго меншим, ніж значення праворуч",
+		Russian: "Значение слева должно быть строго меньше, чем справа",
 		Spanish: "El Izquierdo debe ser estrictamente menor que el Derecha",
 		Portuguese: "O limite esquerdo tem de ser estritamente menor do que o limite direito",
 		Japanese: "左端点は右端点より小さくなくてはなりません",
@@ -1234,9 +1234,9 @@ var MLstringsResults = [
 	{
 		English: "The number of sample must be bigger than 30",
 		French: "Le nombre d'échantillon doit être supérieur à 30",
-		German: "The number of sample must be bigger than 30",//todogerman
-		Ukrainian: "The number of sample must be bigger than 30",
-		Russian: "The number of sample must be bigger than 30",
+		German: "Die Stichprobengröße sollte größer als 30 sein",
+		Ukrainian: "Розмір вибірки повинен бути більший ніж 30",
+		Russian: "Размер выборки должен быть больше 30",
 		Spanish: "El tamaño de la muestra debe ser superior a 30",
 		Portuguese: "O tamanho da amostra tem de ser maior do que 30",
 		Japanese: "標本数は30より大きくなくてはなりません",
@@ -1245,9 +1245,9 @@ var MLstringsResults = [
 	{
 		English: "The number of sample must be smaller than 100 000",
 		French: "Le nombre d'échantillons doit être inférieur à 100 000",
-		German: "The number of sample must be smaller than 100 000",//todogerman
-		Ukrainian: "The number of sample must be smaller than 100 000",
-		Russian: "The number of sample must be smaller than 100 000",
+		German: "Die Stichprobengröße sollte kleiner als 100 000 sein",
+		Ukrainian: "Розмір вибірки повинен бути менший ніж 100 000",
+		Russian: "Размер выборки не должен превышать 100 000",
 		Spanish: "El tamaño de la muestra debe ser menor que 100 000",
 		Portuguese: "O tamanho da amostra tem de ser menor do que 100 000",
 		Japanese: "標本数は100 000より小さくなくてはなりません",
@@ -1256,9 +1256,9 @@ var MLstringsResults = [
 	{
 		English: "Error in the evaluation of the output expression:",
 		French: "Erreur dans l'évaluation de la grandeur de sortie:",
-		German: "Error in the evaluation of the output expression:",//todogerman
-		Ukrainian: "Error in the evaluation of the output expression:",
-		Russian: "Error in the evaluation of the output expression:",
+		German: "Fehler in der Auswertung des Ausgabenausdrucks:",
+		Ukrainian: "Помилка при обчисленні результуючого виразу:",
+		Russian: "Ошибка при исчислении результирующего выражения:",
 		Spanish: "Error en la evaluación de la expresión de salida.",
 		Portuguese: "Erro na avaliação da espressão que define a quantidade de saída:",
 		Japanese: "出力量に対する次式の評価エラー:",

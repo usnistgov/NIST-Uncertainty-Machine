@@ -27,9 +27,8 @@ if(strsplit(line, "=")[[1]][1]=="version")
 cat(paste("Conf file version: " , version,"\n"))
 
 
-if (version =="1.0.2" || version =="1.0.3" || version =="1.0.4" || version =="1.0.5" || version =="1.1" || version =="1.2"|| version =="1.3"|| version =="1.4"|| version =="1.5")
-{
-
+if (version %in% c("1.0.2", "1.0.3", "1.0.4", "1.0.5", "1.1", "1.2",
+                   "1.3", "1.4", "1.5", "1.6")) {
 	line = readLines(fh, n=1 )
 	seed = as.integer(strsplit(line, "=")[[1]][2])
 	set.seed( as.integer(strsplit(line, "=")[[1]][2]))
@@ -41,20 +40,22 @@ if (version =="1.0.2" || version =="1.0.3" || version =="1.0.4" || version =="1.
 	type=integer(nbVar)
 	parameters=as.list(rep(NA,nbVar))
 
-	for(ii in 1:nbVar)
-	{
+	for(ii in 1:nbVar) {
 		line = strsplit(strsplit(readLines(fh, n=1 ), "=")[[1]][2],";")[[1]]
 		varNames = c(varNames,line[1])
 		type[ii]=as.integer(line[2])
 		parameters[[ii]] = as.double(line[-(1:2)])
 	}
 
-	line = strsplit(substring(readLines(fh, n=1 ),12), ";")[[1]]
-	line = line [nchar(line)>0]
+	line = substring(readLines(fh, n=1 ),12)
+	line = clean_html_entities(line)
+	line = strsplit(line, ";")[[1]]
+	line = line[nchar(line)>0]
 	expression=line[length(line)]
 	pretreatment=NA
-	if(length(line)>1)
+	if(length(line)>1){
 		pretreatment=paste(paste(line[1:(length(line)-1)], collapse = ';'),";",sep="")
+	}
 	line = readLines(fh, n=1 )
 	nbOut = 1;
 	expressions = {};
@@ -68,11 +69,12 @@ if (version =="1.0.2" || version =="1.0.3" || version =="1.0.4" || version =="1.
 		}
 		nbOut = nbOut +1;
 		line = strsplit(substring(line,12), ";")[[1]]
-		line = line [nchar(line)>0]
+		line = line[nchar(line)>0]
 		expressions = c(expressions ,line[length(line)])
 		pretreatment=NA
-		if(length(line)>1)
-			pretreatment=paste(paste(line[1:(length(line)-1)], collapse = ';'),";",sep="")
+		if(length(line)>1) {
+		  pretreatment=paste(paste(line[1:(length(line)-1)], collapse = ';'),";",sep="")
+		}
 		pretreatments = c(pretreatments ,pretreatment)
 		line = readLines(fh, n=1 )
 	}

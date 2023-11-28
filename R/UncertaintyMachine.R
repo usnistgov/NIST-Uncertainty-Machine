@@ -36,7 +36,7 @@
 ## (copulaType) and (copulaDf) If box (correlation) is ON, then specification of a copula that
 ## defines a joint probability distribution for the input
 
-## (pretreatment) aditional treatment for evaluation of the output quantity
+## (pretreatment) additional treatment for evaluation of the output quantity
 
 # Specify an extra library location where the needed library are installed example: extraLibLoc="~/Rlib"
 extraLibLoc=NULL
@@ -83,6 +83,15 @@ errorStop = function (errorString = "Error", errorFile = NULL)
 	stop(errorString,call.=FALSE)
 }
 
+clean_html_entities = function(string) {
+  
+  string = gsub('&lt;','<',string)
+  string = gsub('&gt;','>',string)
+  string = gsub('&amp;','&',string)
+  
+  return(string)
+}
+
 gummer = function (f, x, u, r=diag(length(u)), ...)
 {
 	g=NA
@@ -90,7 +99,7 @@ gummer = function (f, x, u, r=diag(length(u)), ...)
 	if(any(is.na(g)))
 	{
 		cat(paste("Complex gradient in use\n"))
-		try(g <- grad(f, x,,method = "complex" ,...))
+		try(g <- grad(f, x,method = "complex" ,...))
 	}
 	y = f(x, ...)
 	uy = sqrt(matrix(g, nrow=1) %*% (outer(u,u,"*")*r) %*% matrix(g, ncol=1))
@@ -172,7 +181,7 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 		source("R/asymmetric.R")
 	}
 
-	cat(paste("expression: " , expression,"pretreatment: " , pretreatment,"outputFile: " , outputFile,"symmetrical: " , symmetrical,"\n"))
+	cat(paste("expression: " , expression,"pretreatment: " , pretreatment,"outputFile: " , outputFile,"symmetrical: " , symmetrical,"\n"),file=stderr())
 
 	if(outputFile!="no-output")
 	{
@@ -193,6 +202,9 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 			file.remove(outputFile2)
 		if(file.exists(outputFile3))
 			file.remove(outputFile3)
+	} else {
+	  outputFile2 = NA
+	  outputFile3 = NA
 	}
 	##Selection of the error file NULL local outputFile2 for web version
 	errorFile=outputFile2
@@ -222,8 +234,8 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	if(nbReal>5000000)
 		errorStop("Number of realizations too big, maximum allowed is 5 000 000\n",errorFile)
 
-	if(nbReal<100000)
-		errorStop("The number of realizations should be greater than 100000\n",errorFile)
+	if(nbReal<10000)
+		errorStop("The number of realizations should be greater than 9999\n",errorFile)
 
 	## (COMP-04) If correlations are given, verify that the resulting
 	## correlation matrix has all eigenvalues positive.
@@ -250,80 +262,92 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	meanX = numeric(nbVar)
 
 	##Safe Environment
-	safe_f <- c(
-			getGroupMembers("Math"),
-			getGroupMembers("Arith"),
-			getGroupMembers("Compare"),
-			"<-","{","(","[","=","pi","complex","Re","Im","Mod","Arg","c","function","$","mapply",
-			"matrix","%*%","pmin","pmax"
-	)
+	safe_f <- c(getGroupMembers("Math"),
+	            getGroupMembers("Arith"),
+	            getGroupMembers("Compare"),
+	            "<-", "{", "(", "[", "=", "pi", "complex", "Re", "Im",
+	            "Mod", "Arg", "c", "function", "$", "mapply",  
+	            "matrix", "%*%", "pmin", "pmax", "sum", 
+	            "sapply", "lapply")
+	
 
 	varEnv <- new.env(parent = emptyenv())
 
 	for (f in safe_f) {
 		varEnv[[f]] <- get(f, "package:base")
 	}
+	
+	browser()
 	varEnv[["uniroot"]] <- get("uniroot")
 	varEnv[["t"]] <- get("t.default")
 	varEnv[["solve"]] <- get("solve.default")
+	varEnv[["optim"]] <- get("optim", "package:stats")
 
-	if(is.logical(correlation))
-	{
-		for(ii in 1:nbVar)
-		{
+	if(is.logical(correlation)) {
+	  
+		for(ii in 1:nbVar) {
 			res = drawDistrib(type,parameters,varNames,varEnv,errorFile,ii)
 			meanX[ii]=res$meanX
 			sdX[ii]=res$sdX
 
 		}
-	}else
-	{
+	  
+	} else {
 
-		if(copulaType=="Gaussian")
-		{
+		if(copulaType=="Gaussian") {
 			z = rmvnorm(nbReal, mean=rep(0, nbVar), sigma=correlation)
 			z = pnorm(z)
-		}else
-		{
+		} else {
 			z = rmvt(nbReal, sigma=correlation, df=copulaDf)
 			z = pt(z, df=copulaDf)
 		}
 
 
-		for(ii in 1:nbVar)
-		{
+		for(ii in 1:nbVar) {
 			res = drawDistribCorel(type,parameters,varNames,z,varEnv,errorFile,ii)
 			meanX[ii]=res$meanX
 			sdX[ii]=res$sdX
 		}
 
 	}
+	
+
 	y=NULL
 	timeOut = 300
-	if(!is.na(pretreatment))
-	{
+	if(!is.na(pretreatment))	{
 		setTimeLimit(timeOut, timeOut)
-		res1<-try(eval(parse(text=pretreatment),envir = varEnv),silent = TRUE)
+	  cat(pretreatment,file=stderr())
+		res1<-try(eval(parse(text=pretreatment),envir = varEnv),silent = FALSE)
 		setTimeLimit(Inf, Inf)
-		if(class(res1) == "try-error")
+		if(class(res1) == "try-error") {
 			errorStop(paste("Impossible to evaluate the output expression \n",strsplit(res1,":")[[1]][2], "\n"), errorFile)
+		}
 	}
+	
 	setTimeLimit(timeOut, timeOut)
 	res2<-try(eval(parse(text=paste( "y =",expression,sep="")),envir = varEnv),silent = TRUE)
 	setTimeLimit(Inf, Inf)
-	if(class(res2) == "try-error")
+	
+	if(class(res2) == "try-error") {
 		errorStop(paste("Error in the evaluation of the output expression:" ,expression, "\n",strsplit(res2,":")[[1]][2], "\n"), errorFile)
-
+  }
 	y = varEnv$y
 
-	if(class(y)!="numeric")
+	if(class(y)!="numeric") {
 		errorStop("Ouput quantity is not of type: numeric\nPlease check its definition", errorFile)
-	if(any(is.na(y)))
-		errorStop("NaNs produced in the ouput quantities\nPlease check its definition", errorFile)
-	if(any(y==Inf))
+	}
+	  
+	if(any(is.na(y))) {
+	  errorStop("NaNs produced in the ouput quantities\nPlease check its definition", errorFile)
+	}
+	
+	if(any(is.infinite(y))) {
 		errorStop("Inf values produced in the ouput quantities\nPlease check its definition", errorFile)
-	if(all(y==y[1]))
+	}
+	
+	if(all(y==y[1])) {
 		errorStop("This application does not support a constant output quantity", errorFile)
+	}
 
 
 
@@ -337,26 +361,49 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 					res=600, quality=100, pointsize=10, bg="white",type=deviceType)
 		par(mar=c(4.5, 4.5, 0.5, 0.75))
 
-		if(parallelL2)
-			mcparallel(
-				{
-				  plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
-				       col="Blue", main="",
-				       xlab="", ylab="Probability Density")
-				  curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
-				  mtext("Output quantity (Y)          ", side=1, line=2,adj = 1)
-				  legend("bottomleft",inset =c(-0.17,- 0.20) , c("Monte Carlo sample drawn from distribution of output quantity","Gaussian distribution with same mean and standard deviation as Monte Carlo sample"), col = c("blue","red"), lty = c(1,3),cex = 0.55,xpd = TRUE)
-				  dev.off()
-
-				})
-		else
+		if (parallelL2) {
+		  mcparallel(
+		    {
+		      Dy = density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y))
+		      xx = seq(from=mean(y)-3*sd(y), to=mean(y)+3*sd(y),
+		               length=512)
+		      Dx = list(x=xx, y=dnorm(xx, mean=mean(y), sd=sd(y)))
+		      plot(range(c(Dx$x, Dy$x)), range(c(Dx$y, Dy$y)), 
+		           bty="n", type="n", main="",
+		           xlab="", ylab="Probability Density")
+		      lines(Dy, col="Blue")
+		      lines(Dx, lty=3, lwd=2, col="Red")
+		      mtext("Output quantity (Y)          ", side=1, line=2,
+		            adj = 1)
+		      legend("bottomleft", inset =c(-0.17,- 0.20), 
+		             c(paste0("Monte Carlo sample drawn from ",
+		                      "distribution of output quantity"),
+		               paste0("Gaussian distribution with same mean ",
+		                      "and standard deviation as Monte Carlo ",
+		                      "sample")), col=c("blue","red"),
+		             lty=c(1,3), cex=0.55, xpd=TRUE)
+		      dev.off()
+		    })
+		} else
 		{
-		  plot(density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y)), bty="n",
-		       col="Blue", main="",
+		  Dy = density(y, from=mean(y)-3*sd(y), to=mean(y)+3*sd(y))
+		  xx = seq(from=mean(y)-3*sd(y), to=mean(y)+3*sd(y),
+		           length=512)
+		  Dx = list(x=xx, y=dnorm(xx, mean=mean(y), sd=sd(y)))
+		  plot(range(c(Dx$x, Dy$x)), range(c(Dx$y, Dy$y)), 
+		       bty="n", type="n", main="",
 		       xlab="", ylab="Probability Density")
-		  curve(dnorm(x, mean=mean(y), sd=sd(y)), lty=3, lwd=2, col="Red", from=mean(y)-3*sd(y), to=mean(y)+3*sd(y), add=TRUE)
-		  mtext("Output quantity (Y)          ", side=1, line=2,adj = 1)
-			legend("bottomleft",inset =c(-0.17,- 0.20) , c("Monte Carlo sample drawn from distribution of output quantity","Gaussian distribution with same mean and standard deviation as Monte Carlo sample"), col = c("blue","red"), lty = c(1,3),cex = 0.55,xpd = TRUE)
+		  lines(Dy, col="Blue")
+		  lines(Dx, lty=3, lwd=2, col="Red")
+		  mtext("Output quantity (Y)          ", side=1, line=2,
+		        adj = 1)
+		  legend("bottomleft", inset =c(-0.17,- 0.20), 
+		         c(paste0("Monte Carlo sample drawn from ",
+		                  "distribution of output quantity"),
+		           paste0("Gaussian distribution with same mean ",
+		                  "and standard deviation as Monte Carlo ",
+		                  "sample")), col=c("blue","red"),
+		         lty=c(1,3), cex=0.55, xpd=TRUE)
 		  dev.off()
 		}
 		cat("\nY values saved in file:  ",outputFile,"\n")

@@ -9,7 +9,8 @@
 var UserData = "./UserData";
 
 
-
+// resultsDisplay() is called in script.js
+// ressultsDisplay() calls linksDisplay() and linksTabDisplay()
 function resultsDisplay(resultTab,ID,outputNb) {
 	var d = new Date();
 
