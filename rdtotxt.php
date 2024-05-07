@@ -17,7 +17,7 @@
 
     if($reg_exp_match == 1) {
         http_response_code(400);
-		error_log("Illegal charaacter detected in POST request.");
+		error_log("Illegal character detected in POST request.");
 		exit();
     } 
 
