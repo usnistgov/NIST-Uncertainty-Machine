@@ -11,7 +11,6 @@ $UserData = "./UserData";
 $Rscript = "Rscript";
 
 
-
 if (!empty($_POST))
 {
 	//Clean the UserData Folder
@@ -51,6 +50,21 @@ if (!empty($_POST))
 
 	$params = array();
 	parse_str($_POST["data"], $params);
+
+	// check for special characters
+	foreach($params as $t_param) {
+
+		$reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"]/',$t_param);
+
+		if($reg_exp_match == 1) {
+			http_response_code(400);
+			error_log("Illegal charaacter detected in POST request.");
+			exit();
+		} 
+
+	}
+
+
 
 	//Trim and remove whitespace from post data
 	foreach($params as $key => $value) {
