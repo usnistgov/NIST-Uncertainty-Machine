@@ -52,19 +52,21 @@ if (!empty($_POST))
 	parse_str($_POST["data"], $params);
 
 	// check for special characters
-	foreach($params as $t_param) {
+	foreach(array_keys($params) as $t_params_key) {
 
-		$reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"]/',$t_param);
+		// don't apply the strict preg_match to the output key because there will be math symbols
+		if(preg_match('/^output/',$t_params_key)) {
+			continue;
+		}
+
+		$reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"]/', $params[$t_params_key]);
 
 		if($reg_exp_match == 1) {
-			http_response_code(400);
-			error_log("Illegal character detected in POST request.");
-			exit();
+			$validInputs = FALSE;
+			echo "<pre><span data-mlr-text> Bad character detected in body of post request. </span> <br /></pre>";
 		} 
 
 	}
-
-
 
 	//Trim and remove whitespace from post data
 	foreach($params as $key => $value) {
@@ -249,7 +251,7 @@ if (!empty($_POST))
 		var_dump($array);
 
 
-		file_put_contents ( "$folder/config.um" , $array );
+		file_put_contents( "$folder/config.um" , $array );
 		if($debug)
 		echo "<br />".$Rscript." --verbose R/launchscript.R ".$UserData."/".$session."/config.um<br />";
 		exec($Rscript." --verbose R/launchscript.R ".$UserData."/".$session."/config.um ",$Routput);

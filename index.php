@@ -61,7 +61,7 @@
 	<div class="content">
         <br>
         <h1 style="font-family:Computer Modern;">NIST Uncertainty Machine</h1> 
-		<h5 id="versionNumber" style="font-family:Computer Modern;">Version 1.6.1</h5>
+		<h5 id="versionNumber" style="font-family:Computer Modern;">Version 1.6.2</h5>
         <h5><select id="mbPOCControlsLangDrop"></select></h5>
 		<div id="tabs">
 			<ul id="tabsul">
