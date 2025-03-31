@@ -34,7 +34,7 @@ Bug reports and suggestions for improvement are most welcome: please send them t
 
 ## Acknowledgements
 
-The authors of the NIST Uncertainty Machine -- Thomas Lafarge, David Newton, Amanda Koepke, and Antonio Possolo -- thank Carlo Carobbi and Francesca Bonacorsi (Università degli Studi di Firenze, Florence, Italy) for detecting an error in the engine of the NIST Uncertainty Machine (NUM), and for kindly alerting us to it. The authors are also particularly indebted to David Duewer (NIST) for offering valuable suggestions for improvement, and are grateful to all the users of the NUM throughout the world for their interest in this application, and for their suggestions and comments. Thanks to Nick Lyons for UX suggestions and improvements.
+The authors of the NIST Uncertainty Machine -- Thomas Lafarge, David Newton, Amanda Koepke, and Antonio Possolo -- thank Carlo Carobbi and Francesca Bonacorsi (Università degli Studi di Firenze, Florence, Italy) for detecting an error in the engine of the NIST Uncertainty Machine (NUM), and for kindly alerting us to it. The authors are also particularly indebted to David Duewer (NIST) for offering valuable suggestions for improvement, and are grateful to all the users of the NUM throughout the world for their interest in this application, and for their suggestions and comments. We are grateful to Nick Lyons for sharing insightful UX/UI suggestions, and to Adam Pintar for many discussions supporting the development of the NIST Uncertainty Machine.
 
 ## Validation & Verification R Script
 
