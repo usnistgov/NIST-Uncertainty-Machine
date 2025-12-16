@@ -59,7 +59,11 @@ if (!empty($_POST))
 			continue;
 		}
 
-		$reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"]/', $params[$t_params_key]);
+		if(preg_match('/^paramField/',$t_params_key)) {
+			continue;
+		}
+
+		$reg_exp_match = preg_match('/[|;$><\!>#`{}()*=?\[\]\–~\'\"]/', $params[$t_params_key]);
 
 		if($reg_exp_match == 1) {
 			$validInputs = FALSE;
