@@ -268,7 +268,7 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	            "<-", "{", "(", "[", "=", "pi", "complex", "Re", "Im",
 	            "Mod", "Arg", "c", "function", "$", "mapply",  
 	            "matrix", "%*%", "pmin", "pmax", "sum", 
-	            "sapply", "lapply","min","max","mean","median","sort"
+	            "sapply", "lapply","min","max","mean","sort"
 	            )
 	
 
@@ -277,12 +277,12 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	for (f in safe_f) {
 		varEnv[[f]] <- get(f, "package:base")
 	}
-	
-	#browser()
+
 	varEnv[["uniroot"]] <- get("uniroot")
 	varEnv[["t"]] <- get("t.default")
 	varEnv[["solve"]] <- get("solve.default")
 	varEnv[["optim"]] <- get("optim", "package:stats")
+	varEnv[["median"]] <- get("median", "package:stats")
 
 	if(is.logical(correlation)) {
 	  
