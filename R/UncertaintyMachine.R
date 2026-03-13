@@ -268,7 +268,8 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 	            "<-", "{", "(", "[", "=", "pi", "complex", "Re", "Im",
 	            "Mod", "Arg", "c", "function", "$", "mapply",  
 	            "matrix", "%*%", "pmin", "pmax", "sum", 
-	            "sapply", "lapply")
+	            "sapply", "lapply","min","max","mean","median","sort"
+	            )
 	
 
 	varEnv <- new.env(parent = emptyenv())
@@ -277,7 +278,7 @@ distrib = function(nbVar,nbReal,varNames,expression,type,parameters,symmetrical,
 		varEnv[[f]] <- get(f, "package:base")
 	}
 	
-	browser()
+	#browser()
 	varEnv[["uniroot"]] <- get("uniroot")
 	varEnv[["t"]] <- get("t.default")
 	varEnv[["solve"]] <- get("solve.default")
