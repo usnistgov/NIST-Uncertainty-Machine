@@ -13,7 +13,7 @@
 	$Rscript = "Rscript";
 
 	// check for special characters
-    $reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"]/',$values);
+    $reg_exp_match = preg_match('/[|;&$><\!>#`{}()*=?\[\]\–~%+,\'\"\n\r]/',$values);
 
     if($reg_exp_match == 1) {
         http_response_code(400);
